@@ -1,31 +1,33 @@
 package com.yatmk.test.adapter.output.persistence.models.local;
 
-import javax.persistence.Entity;
-
 import com.yatmk.test.adapter.output.persistence.models.config.BaseEntity;
+import lombok.*;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
-import lombok.With;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import java.math.BigDecimal;
+import java.math.BigInteger;
 
 @Entity
-@Data
+@Getter
+@Setter
 @With
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode(callSuper = true)
+@Table(name = "TEST_ENTITY_TABLE")
 public class TestEntity extends BaseEntity {
 
+    @Column(name = "ATTR1")
+    private String attr1 ;
 
-  private String attr1 ;
+    @Column(name = "ATTR2")
+    private BigInteger attr2 ;
 
-  private Integer attr2 ;
+    @Column(name = "ATTR3")
+    private Boolean attr3 ;
 
-  private boolean attr3 ;
-
-  private Double attr4 ;
+    @Column(name = "ATTR4")
+    private BigDecimal attr4 ;
 }

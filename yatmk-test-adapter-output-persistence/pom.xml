@@ -30,6 +30,13 @@
       <scope>provided</scope>
     </dependency>
 
+      <dependency>
+          <groupId>com.yatmk</groupId>
+          <artifactId>yatmk-test-ports</artifactId>
+          <version>${project.version}</version>
+          <scope>provided</scope>
+      </dependency>
+
     <dependency>
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-jpamodelgen</artifactId>

@@ -66,13 +66,6 @@
       <artifactId>spring-boot-starter-log4j2</artifactId>
     </dependency>
 
-    <dependency>
-      <groupId>org.apache.logging.log4j</groupId>
-      <artifactId>log4j-spring-boot</artifactId>
-      <scope>runtime</scope>
-      <version>${apache.logging.log4j.version}</version>
-    </dependency>
-
 
     <dependency>
       <groupId>org.projectlombok</groupId>

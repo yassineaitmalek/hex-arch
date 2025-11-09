@@ -5,9 +5,9 @@ import lombok.experimental.UtilityClass;
 @UtilityClass
 public class BasePackage {
 
-  public static final String BASE_REPO = "com.yatmk.test.persistence.repositories.";
+  public static final String BASE_REPO = "com.yatmk.test.adapter.output.persistence.repositories.";
 
-  public static final String BASE_MODEL = "com.yatmk.test.persistence.models.";
+  public static final String BASE_MODEL = "com.yatmk.test.adapter.output.persistence.models.";
 
   public static final String DSP = "DataSourceProperties";
 

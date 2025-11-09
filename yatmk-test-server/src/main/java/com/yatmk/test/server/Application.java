@@ -8,13 +8,13 @@ import lombok.RequiredArgsConstructor;
 
 @SpringBootApplication
 @ComponentScan(basePackages = {
-                "com.yatmk.test.server",
-                "com.yatmk.test.ports",
-                "com.yatmk.test.infrastructure",
-                "com.yatmk.test.common",
-                "com.yatmk.test.adapter.output.persistence",
-                "com.yatmk.test.adapter.input.rest"
-})
+                                "com.yatmk.test.server",
+                                "com.yatmk.test.ports",
+                                "com.yatmk.test.infrastructure",
+                                "com.yatmk.test.common",
+                                "com.yatmk.test.adapter.output.persistence",
+                                "com.yatmk.test.adapter.input.rest"
+} )
 @RequiredArgsConstructor
 public class Application {
 
