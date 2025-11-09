@@ -1,4 +1,4 @@
-package com.yatmk.test.presentation.security;
+package com.yatmk.test.server.security;
 
 import org.springframework.context.annotation.Configuration;
 

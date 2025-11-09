@@ -1,1 +1,1 @@
-multi maven project n-layer template
+multi maven project Hexagonal template

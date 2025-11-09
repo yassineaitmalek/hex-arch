@@ -1,4 +1,4 @@
-package com.yatmk.test.presentation;
+package com.yatmk.test.server;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 
 @SpringBootApplication
 @ComponentScan(basePackages = {
+                "com.yatmk.test.server",
                 "com.yatmk.test.ports",
                 "com.yatmk.test.infrastructure",
                 "com.yatmk.test.common",

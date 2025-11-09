@@ -1,4 +1,5 @@
-package com.yatmk.test.presentation.config;
+package com.yatmk.test.server.config;
+
 
 import java.util.Arrays;
 import java.util.List;
