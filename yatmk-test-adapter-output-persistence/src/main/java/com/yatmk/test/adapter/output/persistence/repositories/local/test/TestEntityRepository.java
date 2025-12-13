@@ -1,4 +1,6 @@
-package com.yatmk.test.adapter.output.persistence.repositories.local;
+package com.yatmk.test.adapter.output.persistence.repositories.local.test;
+
+import java.util.Optional;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Repository;
@@ -7,6 +9,7 @@ import com.yatmk.test.adapter.output.persistence.mappers.TestEntityMapper;
 import com.yatmk.test.adapter.output.persistence.models.local.TestEntity;
 import com.yatmk.test.ports.domain.dto.TestCreation;
 import com.yatmk.test.ports.domain.dto.TestDTO;
+import com.yatmk.test.ports.domain.exception.ServerSideException;
 import com.yatmk.test.ports.output.SaveTestPort;
 
 import lombok.RequiredArgsConstructor;
@@ -23,8 +26,11 @@ public class TestEntityRepository implements SaveTestPort {
 
     @Override
     public TestDTO saveTest(TestCreation testCreation) {
-        TestEntity testEntity = modelMapper.map(testCreation, TestEntity.class);
-        testEntity = jpaTestEntityRepository.save(testEntity);
-        return testEntityMapper.toDTO(testEntity);
+        return Optional.ofNullable(testCreation)
+                .map(e -> modelMapper.map(e, TestEntity.class))
+                .map(jpaTestEntityRepository::save)
+                .map(testEntityMapper::toDTO)
+                .orElseThrow(() -> new ServerSideException("error while saving the test"));
+
     }
 }

@@ -1,4 +1,4 @@
-package com.yatmk.test.presentation;
+package com.yatmk.test.adapter.input.rest;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 

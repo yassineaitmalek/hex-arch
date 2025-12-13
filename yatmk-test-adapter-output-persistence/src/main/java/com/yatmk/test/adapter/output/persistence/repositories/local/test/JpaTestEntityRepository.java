@@ -1,4 +1,4 @@
-package com.yatmk.test.adapter.output.persistence.repositories.local;
+package com.yatmk.test.adapter.output.persistence.repositories.local.test;
 
 import org.springframework.stereotype.Repository;
 
