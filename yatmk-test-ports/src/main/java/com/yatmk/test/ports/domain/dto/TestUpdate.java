@@ -12,9 +12,7 @@ import java.math.BigInteger;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class TestDTO {
-
-    private Long id;
+public class TestUpdate {
 
     private String attr1;
 

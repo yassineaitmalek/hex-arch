@@ -6,6 +6,7 @@ import org.mapstruct.factory.Mappers;
 import com.yatmk.test.adapter.output.persistence.models.local.TestEntity;
 import com.yatmk.test.ports.domain.dto.TestCreation;
 import com.yatmk.test.ports.domain.dto.TestDTO;
+import com.yatmk.test.ports.domain.dto.TestUpdate;
 
 @Mapper(componentModel = "spring")
 public interface TestEntityMapper {
@@ -15,4 +16,6 @@ public interface TestEntityMapper {
   TestDTO toDTO(TestEntity entity);
 
   TestEntity toEntity(TestCreation creation);
+
+  TestEntity toEntity(TestUpdate update);
 }

@@ -14,6 +14,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.core.env.Environment;
+import org.springframework.data.envers.repository.support.EnversRevisionRepositoryFactoryBean;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -27,7 +29,8 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @AllArgsConstructor
 @EnableTransactionManagement
-@EnableJpaRepositories(entityManagerFactoryRef = LocalDB.EMF, transactionManagerRef = LocalDB.TM, basePackages = {
+@EnableJpaAuditing(auditorAwareRef = "auditorUserAware")
+@EnableJpaRepositories(entityManagerFactoryRef = LocalDB.EMF, transactionManagerRef = LocalDB.TM, repositoryFactoryBeanClass = EnversRevisionRepositoryFactoryBean.class, basePackages = {
     LocalDB.BASE_REPO })
 public class LocalDB {
 
@@ -77,6 +80,7 @@ public class LocalDB {
     properties.put("hibernate.dialect", env.getProperty(String.format("%s.spring.jpa.database-platform", DB)));
     properties.put("hibernate.generate-ddl", env.getProperty(String.format("%s.spring.jpa.generate-ddl", DB)));
     properties.put("sql.init.mode", env.getProperty(String.format("%s.spring.sql.init.mode", DB)));
+
     return properties;
   }
 
@@ -100,7 +104,7 @@ public class LocalDB {
     return Optional.ofNullable(entityManagerFactory)
         .map(LocalContainerEntityManagerFactoryBean::getObject)
         .map(JpaTransactionManager::new)
-        .orElse(null);
+        .orElseThrow(() -> new RuntimeException("Error initilizing transaction manager"));
   }
 
 }
