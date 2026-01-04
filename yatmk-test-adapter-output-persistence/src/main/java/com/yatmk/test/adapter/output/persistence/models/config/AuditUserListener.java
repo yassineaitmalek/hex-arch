@@ -5,26 +5,24 @@ import javax.persistence.PreUpdate;
 
 public class AuditUserListener {
 
-  @PrePersist
-  public void onPrePersist(Object entity) {
-    if (!(entity instanceof BaseEntity)) {
-      return;
+    @PrePersist
+    public void onPrePersist(Object entity) {
+        if (!(entity instanceof BaseEntity)) {
+            return;
+        }
+        BaseEntity base = (BaseEntity) entity;
+
+        base.setCreatedBy("userCreation");
+        base.setLastModifiedBy("userCreation");
     }
-    BaseEntity base = (BaseEntity) entity;
 
-    base.setCreatedBy("userCreation");
-    base.setLastModifiedBy("userCreation");
+    @PreUpdate
+    public void onPreUpdate(Object entity) {
+        if (!(entity instanceof BaseEntity)) {
+            return;
+        }
+        BaseEntity base = (BaseEntity) entity;
 
-  }
-
-  @PreUpdate
-  public void onPreUpdate(Object entity) {
-    if (!(entity instanceof BaseEntity)) {
-      return;
+        base.setLastModifiedBy("userModification");
     }
-    BaseEntity base = (BaseEntity) entity;
-
-    base.setLastModifiedBy("userModification");
-  }
-
 }

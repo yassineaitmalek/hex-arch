@@ -1,12 +1,11 @@
 package com.yatmk.test.ports.domain.dto;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.math.BigDecimal;
-import java.math.BigInteger;
 
 @Data
 @Builder
@@ -14,11 +13,11 @@ import java.math.BigInteger;
 @AllArgsConstructor
 public class TestCreation {
 
-    private String attr1 ;
+    private String attr1;
 
-    private BigInteger attr2 ;
+    private BigInteger attr2;
 
-    private Boolean attr3 ;
+    private Boolean attr3;
 
-    private BigDecimal attr4 ;
+    private BigDecimal attr4;
 }

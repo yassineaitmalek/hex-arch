@@ -11,6 +11,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class VersionDTO {
 
-  private String version;
-
+    private String version;
 }

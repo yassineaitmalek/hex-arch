@@ -1,22 +1,18 @@
 package com.yatmk.test.adapter.output.persistence.models.local;
 
+import com.yatmk.test.adapter.output.persistence.models.config.BaseEntity;
 import java.math.BigDecimal;
 import java.math.BigInteger;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-
-import org.hibernate.envers.Audited;
-
-import com.yatmk.test.adapter.output.persistence.models.config.BaseEntity;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.With;
+import org.hibernate.envers.Audited;
 
 @Entity
 @Getter

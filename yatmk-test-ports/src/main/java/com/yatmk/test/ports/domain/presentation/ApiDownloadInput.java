@@ -1,9 +1,7 @@
 package com.yatmk.test.ports.domain.presentation;
 
-import java.util.Optional;
-
 import com.yatmk.test.ports.domain.exception.ServerSideException;
-
+import java.util.Optional;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -17,24 +15,22 @@ import lombok.Setter;
 @AllArgsConstructor
 public class ApiDownloadInput {
 
-  private byte[] bytes;
+    private byte[] bytes;
 
-  private String fileName;
+    private String fileName;
 
-  private String ext;
+    private String ext;
 
-  public String getValidName() {
+    public String getValidName() {
+        return Optional
+            .ofNullable(fileName)
+            .map(String::trim)
+            .filter(e -> !e.isEmpty())
+            .map(e -> e.concat(rightExt()))
+            .orElseThrow(() -> new ServerSideException("a name must be given to the file"));
+    }
 
-    return Optional.ofNullable(fileName)
-        .map(String::trim)
-        .filter(e -> !e.isEmpty())
-        .map(e -> e.concat(rightExt()))
-        .orElseThrow(() -> new ServerSideException("a name must be given to the file"));
-
-  }
-
-  public String rightExt() {
-    return Optional.ofNullable(ext).map(String::trim).map("."::concat).orElseGet(String::new);
-  }
-
+    public String rightExt() {
+        return Optional.ofNullable(ext).map(String::trim).map("."::concat).orElseGet(String::new);
+    }
 }

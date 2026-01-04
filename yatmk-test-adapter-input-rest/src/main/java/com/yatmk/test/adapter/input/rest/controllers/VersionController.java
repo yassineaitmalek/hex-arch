@@ -20,11 +20,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/version")
 public class VersionController implements AbstractController {
 
-  private final AppVersionProperies appVersionProperies;
+    private final AppVersionProperies appVersionProperies;
 
-  @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<ApiDataResponse<VersionDTO>> getVersion() {
-    return ok(() -> VersionDTO.builder().version(appVersionProperies.getVersion()).build());
-  }
-
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<ApiDataResponse<VersionDTO>> getVersion() {
+        return ok(() -> VersionDTO.builder().version(appVersionProperies.getVersion()).build());
+    }
 }

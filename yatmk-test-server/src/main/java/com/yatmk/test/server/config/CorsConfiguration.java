@@ -10,12 +10,13 @@ public class CorsConfiguration implements WebMvcConfigurer {
 
     @Override
     public void addCorsMappings(@NonNull CorsRegistry registry) {
-        registry.addMapping("/**")
-                .allowedOrigins("*")
-                .allowCredentials(false)
-                .maxAge(3600)
-                .allowedHeaders("*")
-                .exposedHeaders("*")
-                .allowedMethods("*");
+        registry
+            .addMapping("/**")
+            .allowedOrigins("*")
+            .allowCredentials(false)
+            .maxAge(3600)
+            .allowedHeaders("*")
+            .exposedHeaders("*")
+            .allowedMethods("*");
     }
 }

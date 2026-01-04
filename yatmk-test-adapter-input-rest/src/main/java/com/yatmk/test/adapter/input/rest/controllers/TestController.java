@@ -1,7 +1,15 @@
 package com.yatmk.test.adapter.input.rest.controllers;
 
+import com.yatmk.test.adapter.input.rest.config.AbstractController;
+import com.yatmk.test.ports.domain.dto.TestCreation;
+import com.yatmk.test.ports.domain.dto.TestDTO;
+import com.yatmk.test.ports.domain.dto.TestUpdate;
+import com.yatmk.test.ports.domain.presentation.ApiDataResponse;
+import com.yatmk.test.ports.input.TestUseCase;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
-
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -14,45 +22,46 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.yatmk.test.adapter.input.rest.config.AbstractController;
-import com.yatmk.test.ports.domain.dto.TestCreation;
-import com.yatmk.test.ports.domain.dto.TestDTO;
-import com.yatmk.test.ports.domain.dto.TestUpdate;
-import com.yatmk.test.ports.domain.presentation.ApiDataResponse;
-import com.yatmk.test.ports.input.TestUseCase;
-
-import lombok.RequiredArgsConstructor;
-
 //@Hidden
 @Validated
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/test")
+@Tag(name = "test", description = "Operations for Test ")
 public class TestController implements AbstractController {
 
     private final TestUseCase testUseCase;
 
+    @Operation(summary = "Create a new test")
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ApiDataResponse<TestDTO>> createTest(@RequestBody TestCreation creation) {
         return ok(() -> testUseCase.create(creation));
     }
 
+    @Operation(summary = "Get test audit by ID")
     @GetMapping(value = "/{id}/audit", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ApiDataResponse<List<TestDTO>>> getAudit(@PathVariable Long id) {
         return ok(() -> testUseCase.getAudit(id));
     }
 
+    @Operation(summary = "Get test by ID")
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ApiDataResponse<TestDTO>> get(@PathVariable Long id) {
         return ok(() -> testUseCase.get(id));
     }
 
+    @Operation(summary = "Delete test by ID")
     @DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         return noContent(() -> testUseCase.delete(id));
     }
 
-    @PatchMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "Update test by ID")
+    @PatchMapping(
+        value = "/{id}",
+        consumes = MediaType.APPLICATION_JSON_VALUE,
+        produces = MediaType.APPLICATION_JSON_VALUE
+    )
     public ResponseEntity<ApiDataResponse<TestDTO>> update(@PathVariable Long id, @RequestBody TestUpdate update) {
         return ok(() -> testUseCase.update(id, update));
     }

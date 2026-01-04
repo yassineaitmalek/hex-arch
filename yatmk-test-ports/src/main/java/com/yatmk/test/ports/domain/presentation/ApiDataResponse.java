@@ -3,7 +3,6 @@ package com.yatmk.test.ports.domain.presentation;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.ZoneId;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -17,19 +16,18 @@ import lombok.Setter;
 @AllArgsConstructor
 public class ApiDataResponse<T> {
 
-  private String status;
+    private String status;
 
-  private Integer httpStatus;
+    private Integer httpStatus;
 
-  @Builder.Default
-  private String date = LocalDate.now().toString();
+    @Builder.Default
+    private String date = LocalDate.now().toString();
 
-  @Builder.Default
-  private String time = LocalTime.now().toString();
+    @Builder.Default
+    private String time = LocalTime.now().toString();
 
-  @Builder.Default
-  private String zone = ZoneId.systemDefault().toString();
+    @Builder.Default
+    private String zone = ZoneId.systemDefault().toString();
 
-  private T data;
-
+    private T data;
 }

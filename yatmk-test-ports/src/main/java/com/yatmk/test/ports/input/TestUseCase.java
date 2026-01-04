@@ -1,13 +1,11 @@
 package com.yatmk.test.ports.input;
 
-import java.util.List;
-
 import com.yatmk.test.ports.domain.dto.TestCreation;
 import com.yatmk.test.ports.domain.dto.TestDTO;
 import com.yatmk.test.ports.domain.dto.TestUpdate;
+import java.util.List;
 
 public interface TestUseCase {
-
     public TestDTO create(TestCreation creation);
 
     public List<TestDTO> getAudit(Long id);
@@ -17,5 +15,4 @@ public interface TestUseCase {
     public void delete(Long id);
 
     public TestDTO update(Long id, TestUpdate update);
-
 }

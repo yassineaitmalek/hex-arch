@@ -1,10 +1,9 @@
 package com.yatmk.test.adapter.input.rest.config.properties;
 
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.context.annotation.Configuration;
-
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Configuration;
 
 @Data
 @Configuration
@@ -12,6 +11,5 @@ import lombok.RequiredArgsConstructor;
 @ConfigurationProperties(prefix = "app")
 public class AppVersionProperies {
 
-  private String version;
-
+    private String version;
 }

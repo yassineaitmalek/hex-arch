@@ -31,7 +31,5 @@ public class SpringContext implements ApplicationContextAware {
         public T get() {
             return value;
         }
-
     }
-
 }

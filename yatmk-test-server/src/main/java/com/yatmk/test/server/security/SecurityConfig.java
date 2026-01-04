@@ -1,11 +1,8 @@
 package com.yatmk.test.server.security;
 
-import org.springframework.context.annotation.Configuration;
-
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @RequiredArgsConstructor
-public class SecurityConfig {
-
-}
+public class SecurityConfig {}

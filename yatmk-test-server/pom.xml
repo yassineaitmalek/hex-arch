@@ -26,7 +26,6 @@
   <dependencies>
 
 
-
     <dependency>
       <groupId>com.yatmk</groupId>
       <artifactId>yatmk-test-ports</artifactId>
@@ -41,21 +40,21 @@
       <scope>provided</scope>
     </dependency>
 
-      <dependency>
-          <groupId>com.yatmk</groupId>
-          <artifactId>yatmk-test-adapter-output-persistence</artifactId>
-          <version>${project.version}</version>
-          <scope>provided</scope>
-      </dependency>
+    <dependency>
+      <groupId>com.yatmk</groupId>
+      <artifactId>yatmk-test-adapter-output-persistence</artifactId>
+      <version>${project.version}</version>
+      <scope>provided</scope>
+    </dependency>
 
-      <dependency>
-          <groupId>com.yatmk</groupId>
-          <artifactId>yatmk-test-adapter-input-rest</artifactId>
-          <version>${project.version}</version>
-          <scope>provided</scope>
-      </dependency>
+    <dependency>
+      <groupId>com.yatmk</groupId>
+      <artifactId>yatmk-test-adapter-input-rest</artifactId>
+      <version>${project.version}</version>
+      <scope>provided</scope>
+    </dependency>
 
-      <dependency>
+    <dependency>
       <groupId>io.vavr</groupId>
       <artifactId>vavr</artifactId>
     </dependency>
@@ -204,6 +203,20 @@
         <artifactId>jacoco-maven-plugin</artifactId>
         <version>${jacoco.version}</version>
       </plugin>
+
+      <plugin>
+        <groupId>com.diffplug.spotless</groupId>
+        <artifactId>spotless-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <phase>compile</phase>
+            <goals>
+              <goal>check</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
 
     </plugins>
 
