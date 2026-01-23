@@ -51,10 +51,10 @@
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
       <exclusions>
-        <exclusion>
+        <!-- <exclusion>
           <groupId>org.springframework.boot</groupId>
           <artifactId>spring-boot-starter-tomcat</artifactId>
-        </exclusion>
+        </exclusion> -->
         <exclusion>
           <groupId>org.springframework.boot</groupId>
           <artifactId>spring-boot-starter-logging</artifactId>
@@ -227,7 +227,7 @@
         </dependencies>
       </plugin> -->
 
-      <plugin>
+      <!-- <plugin>
         <groupId>io.swagger.core.v3</groupId>
         <artifactId>swagger-maven-plugin</artifactId>
         <version>2.2.8</version>
@@ -261,10 +261,10 @@
             <version>2.2.8</version>
           </dependency>
         </dependencies>
-      </plugin>
+      </plugin> -->
 
 
-      <plugin>
+      <!-- <plugin>
         <groupId>com.diffplug.spotless</groupId>
         <artifactId>spotless-maven-plugin</artifactId>
         <executions>
@@ -275,7 +275,7 @@
             </goals>
           </execution>
         </executions>
-      </plugin>
+      </plugin> -->
 
 
     </plugins>

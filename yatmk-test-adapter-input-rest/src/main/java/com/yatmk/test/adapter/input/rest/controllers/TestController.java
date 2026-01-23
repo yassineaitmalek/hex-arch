@@ -26,42 +26,42 @@ import org.springframework.web.bind.annotation.RestController;
 @Validated
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/test")
+@RequestMapping(TestController.PATH)
 @Tag(name = "test", description = "Operations for Test ")
 public class TestController implements AbstractController {
+
+    private static final String PATH = "/api/test";
+
+    private static final String PATH_FRAGMENT = "/{id}";
 
     private final TestUseCase testUseCase;
 
     @Operation(summary = "Create a new test")
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ApiDataResponse<TestDTO>> createTest(@RequestBody TestCreation creation) {
-        return ok(() -> testUseCase.create(creation));
+        return create(() -> testUseCase.create(creation));
     }
 
     @Operation(summary = "Get test audit by ID")
-    @GetMapping(value = "/{id}/audit", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = PATH_FRAGMENT + "/audit", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ApiDataResponse<List<TestDTO>>> getAudit(@PathVariable Long id) {
         return ok(() -> testUseCase.getAudit(id));
     }
 
     @Operation(summary = "Get test by ID")
-    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = PATH_FRAGMENT, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ApiDataResponse<TestDTO>> get(@PathVariable Long id) {
         return ok(() -> testUseCase.get(id));
     }
 
     @Operation(summary = "Delete test by ID")
-    @DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @DeleteMapping(value = PATH_FRAGMENT, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         return noContent(() -> testUseCase.delete(id));
     }
 
     @Operation(summary = "Update test by ID")
-    @PatchMapping(
-        value = "/{id}",
-        consumes = MediaType.APPLICATION_JSON_VALUE,
-        produces = MediaType.APPLICATION_JSON_VALUE
-    )
+    @PatchMapping(value = PATH_FRAGMENT, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ApiDataResponse<TestDTO>> update(@PathVariable Long id, @RequestBody TestUpdate update) {
         return ok(() -> testUseCase.update(id, update));
     }
