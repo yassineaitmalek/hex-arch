@@ -61,7 +61,11 @@ public class TestController implements AbstractController {
     }
 
     @Operation(summary = "Update test by ID")
-    @PatchMapping(value = PATH_FRAGMENT, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PatchMapping(
+        value = PATH_FRAGMENT,
+        consumes = MediaType.APPLICATION_JSON_VALUE,
+        produces = MediaType.APPLICATION_JSON_VALUE
+    )
     public ResponseEntity<ApiDataResponse<TestDTO>> update(@PathVariable Long id, @RequestBody TestUpdate update) {
         return ok(() -> testUseCase.update(id, update));
     }

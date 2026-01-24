@@ -1,15 +1,13 @@
 package com.yatmk.test.adapter.output.persistence.repositories.local.test;
 
-import org.junit.jupiter.api.Assertions;
-
+import com.yatmk.test.adapter.output.persistence.models.local.TestEntity;
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-
-import org.junit.jupiter.api.AfterAll;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,51 +16,44 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.ActiveProfiles;
 
-import com.yatmk.test.adapter.output.persistence.models.local.TestEntity;
-
-import lombok.extern.slf4j.Slf4j;
-
 @Slf4j
-@ActiveProfiles("test")
 @DataJpaTest
+@ActiveProfiles("test")
 @AutoConfigureTestDatabase(connection = EmbeddedDatabaseConnection.H2)
 public class JpaTestEntityRepositoryTest {
 
-  @Autowired
-  private JpaTestEntityRepository jpaTestEntityRepository;
+    @Autowired
+    private JpaTestEntityRepository jpaTestEntityRepository;
 
-  @BeforeEach
-  void before() {
-    TestEntity entity = new TestEntity("Test Name", BigInteger.ONE, Boolean.FALSE, BigDecimal.TEN);
-    entity.setId(1L);
-    jpaTestEntityRepository.save(entity);
+    @BeforeEach
+    void before() {
+        TestEntity entity = new TestEntity("Test Name", BigInteger.ONE, Boolean.FALSE, BigDecimal.TEN);
+        entity.setId(1L);
+        entity.setCreatedBy("test");
+        entity.setLastModifiedBy("test");
+        jpaTestEntityRepository.save(entity);
+    }
 
-  }
+    @AfterEach
+    void after() {
+        jpaTestEntityRepository.deleteAll();
+    }
 
-  @AfterEach
-  void after() {
-    jpaTestEntityRepository.deleteAll();
-  }
+    @Test
+    void testFindAll() {
+        List<TestEntity> entities = jpaTestEntityRepository.findAll();
 
-  @Test
-  void testFindAll() {
+        Assertions.assertFalse(entities.isEmpty());
+    }
 
-    List<TestEntity> entities = jpaTestEntityRepository.findAll();
-
-    Assertions.assertFalse(entities.isEmpty());
-
-  }
-
-  @Test
-  void testFindById() {
-
-    Optional<TestEntity> entity = jpaTestEntityRepository.findById(1L);
-    Assertions.assertTrue(entity.isPresent());
-    Assertions.assertNotNull(entity.get().getAttr1());
-    Assertions.assertNotNull(entity.get().getAttr2());
-    Assertions.assertNotNull(entity.get().getAttr3());
-    Assertions.assertNotNull(entity.get().getAttr4());
-
-  }
-
+    @Test
+    void testFindById() {
+        Long id = jpaTestEntityRepository.findAll().stream().findAny().map(TestEntity::getId).orElseGet(() -> null);
+        Optional<TestEntity> entity = jpaTestEntityRepository.findById(id);
+        Assertions.assertTrue(entity.isPresent());
+        Assertions.assertNotNull(entity.get().getAttr1());
+        Assertions.assertNotNull(entity.get().getAttr2());
+        Assertions.assertNotNull(entity.get().getAttr3());
+        Assertions.assertNotNull(entity.get().getAttr4());
+    }
 }
