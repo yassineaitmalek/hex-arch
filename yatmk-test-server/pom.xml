@@ -16,7 +16,7 @@
   <artifactId>yatmk-test-server</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>jar</packaging>
-  <name>atmk-test-server</name>
+  <name>yatmk-test-server</name>
   <description>TEST SERVER</description>
 
   <properties>

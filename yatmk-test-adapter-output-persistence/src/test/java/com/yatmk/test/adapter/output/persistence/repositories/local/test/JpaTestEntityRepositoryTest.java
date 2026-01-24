@@ -26,7 +26,7 @@ public class JpaTestEntityRepositoryTest {
     private JpaTestEntityRepository jpaTestEntityRepository;
 
     @BeforeEach
-    void before() {
+    public void before() {
         TestEntity entity = new TestEntity("Test Name", BigInteger.ONE, Boolean.FALSE, BigDecimal.TEN);
         entity.setId(1L);
         entity.setCreatedBy("test");
@@ -35,19 +35,19 @@ public class JpaTestEntityRepositoryTest {
     }
 
     @AfterEach
-    void after() {
+    public void after() {
         jpaTestEntityRepository.deleteAll();
     }
 
     @Test
-    void testFindAll() {
+    public void testFindAll() {
         List<TestEntity> entities = jpaTestEntityRepository.findAll();
 
         Assertions.assertFalse(entities.isEmpty());
     }
 
     @Test
-    void testFindById() {
+    public void testFindById() {
         Long id = jpaTestEntityRepository.findAll().stream().findAny().map(TestEntity::getId).orElseGet(() -> null);
         Optional<TestEntity> entity = jpaTestEntityRepository.findById(id);
         Assertions.assertTrue(entity.isPresent());
@@ -55,5 +55,12 @@ public class JpaTestEntityRepositoryTest {
         Assertions.assertNotNull(entity.get().getAttr2());
         Assertions.assertNotNull(entity.get().getAttr3());
         Assertions.assertNotNull(entity.get().getAttr4());
+    }
+
+    @Test
+    public void testDeleteById() {
+        Long id = jpaTestEntityRepository.findAll().stream().findAny().map(TestEntity::getId).orElseGet(() -> null);
+
+        jpaTestEntityRepository.deleteById(id);
     }
 }
