@@ -8,21 +8,19 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import com.yatmk.test.ports.domain.dto.TestCreation;
+import com.yatmk.test.ports.domain.dto.TestDTO;
+import com.yatmk.test.ports.domain.dto.TestUpdate;
+import com.yatmk.test.ports.output.TestPort;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Arrays;
 import java.util.List;
-
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-
-import com.yatmk.test.ports.domain.dto.TestCreation;
-import com.yatmk.test.ports.domain.dto.TestDTO;
-import com.yatmk.test.ports.domain.dto.TestUpdate;
-import com.yatmk.test.ports.output.TestPort;
 
 @ExtendWith(MockitoExtension.class)
 public class BuinessServiceTest {
@@ -35,7 +33,6 @@ public class BuinessServiceTest {
 
     @Test
     public void testCreate() {
-
         TestCreation creation = new TestCreation("Test Name", BigInteger.ONE, Boolean.FALSE, BigDecimal.TEN);
 
         TestDTO testDTO = new TestDTO(1L, "Test Name", BigInteger.ONE, Boolean.FALSE, BigDecimal.TEN);
@@ -46,7 +43,6 @@ public class BuinessServiceTest {
 
         assertNotNull(createdTest);
         verify(testPort, times(1)).save(any(TestCreation.class));
-
     }
 
     @Test
@@ -76,7 +72,6 @@ public class BuinessServiceTest {
 
         assertNotNull(fetchedTest);
         verify(testPort, times(1)).get(id);
-
     }
 
     @Test
@@ -94,7 +89,6 @@ public class BuinessServiceTest {
 
     @Test
     public void testUpdate() {
-
         Long id = 1l;
         TestUpdate update = new TestUpdate("Updated Name", BigInteger.TEN, Boolean.TRUE, BigDecimal.ONE);
         TestDTO updatedTestDTO = new TestDTO(1L, "Updated Name", BigInteger.TEN, Boolean.TRUE, BigDecimal.ONE);
@@ -105,6 +99,5 @@ public class BuinessServiceTest {
 
         assertNotNull(updatedTest);
         verify(testPort, times(1)).update(id, update);
-
     }
 }
