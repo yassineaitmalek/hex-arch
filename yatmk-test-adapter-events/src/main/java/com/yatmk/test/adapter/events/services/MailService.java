@@ -1,7 +1,7 @@
-package com.yatmk.test.adapter.listener.services;
+package com.yatmk.test.adapter.events.services;
 
-import com.yatmk.test.adapter.listener.events.MailEvent;
-import com.yatmk.test.adapter.listener.events.MailEvent.MailFile;
+import com.yatmk.test.adapter.events.events.MailEvent;
+import com.yatmk.test.adapter.events.events.MailEvent.MailFile;
 import com.yatmk.test.ports.domain.exception.ServerSideException;
 import java.util.Collections;
 import java.util.List;
@@ -14,13 +14,13 @@ import javax.mail.MessagingException;
 import javax.mail.Multipart;
 import javax.mail.Part;
 import javax.mail.Session;
-import javax.mail.Transport;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 @Slf4j
@@ -32,6 +32,8 @@ public class MailService {
     private final String from;
 
     private final Session session;
+
+    private final JavaMailSender mailSender;
 
     public static final long EMAIL_LIMIT_SIZE = 20l * 1024 * 1024;
 
@@ -55,7 +57,7 @@ public class MailService {
             sendFiles(mailEvent, multipart, message);
 
             // send Message
-            Transport.send(message);
+            mailSender.send(message);
         } catch (Exception e) {
             throw new ServerSideException(e);
         }

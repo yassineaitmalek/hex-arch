@@ -1,4 +1,4 @@
-package com.yatmk.test.adapter.listener.config;
+package com.yatmk.test.adapter.events.config;
 
 import java.util.Properties;
 import javax.mail.Session;

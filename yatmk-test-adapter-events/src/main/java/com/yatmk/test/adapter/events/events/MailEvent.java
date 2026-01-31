@@ -1,4 +1,4 @@
-package com.yatmk.test.adapter.listener.events;
+package com.yatmk.test.adapter.events.events;
 
 import java.util.List;
 import javax.activation.DataSource;

@@ -13,11 +13,11 @@
 
 
   <groupId>com.yatmk</groupId>
-  <artifactId>yatmk-test-adapter-listener</artifactId>
+  <artifactId>yatmk-test-adapter-events</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>jar</packaging>
-  <name>yatmk-test-adapter-listener</name>
-  <description>API TEST LISTENER</description>
+  <name>yatmk-test-adapter-events</name>
+  <description>API TEST EVENTS</description>
   <properties>
 
   </properties>
@@ -185,72 +185,6 @@
         <artifactId>jacoco-maven-plugin</artifactId>
         <version>${jacoco.version}</version>
       </plugin>
-
-      <!-- <plugin>
-        <groupId>io.swagger.core.v3</groupId>
-        <artifactId>swagger-maven-plugin</artifactId>
-        <version>2.2.8</version>
-        <executions>
-          <execution>
-            <phase>compile</phase>
-            <goals>
-              <goal>resolve</goal>
-            </goals>
-          </execution>
-        </executions>
-        <configuration>
-          <outputFileName>openapi</outputFileName>
-          <outputPath>${project.build.directory}/generated</outputPath>
-          <outputFormat>JSON</outputFormat>
-          <resourcePackages>
-            <package>com.yatmk.test.adapter.input.rest.controllers</package>
-          </resourcePackages>
-          <prettyPrint>true</prettyPrint>
-        </configuration>
-        <dependencies>
-          <dependency>
-            <groupId>javax.ws.rs</groupId>
-            <artifactId>javax.ws.rs-api</artifactId>
-            <version>2.1.1</version>
-          </dependency>
-        </dependencies>
-      </plugin> -->
-
-      <!-- <plugin>
-        <groupId>io.swagger.core.v3</groupId>
-        <artifactId>swagger-maven-plugin</artifactId>
-        <version>2.2.8</version>
-        <executions>
-          <execution>
-            <phase>compile</phase>
-            <goals>
-              <goal>resolve</goal>
-            </goals>
-          </execution>
-        </executions>
-        <configuration>
-          <outputFileName>openapi</outputFileName>
-          <outputPath>${project.build.directory}/generated</outputPath>
-          <outputFormat>JSON</outputFormat>
-          <resourcePackages>
-            <package>com.yatmk.test.adapter.input.rest.controllers</package>
-          </resourcePackages>
-          <readerClass>io.swagger.v3.jaxrs2.Reader</readerClass>
-          <prettyPrint>true</prettyPrint>
-        </configuration>
-        <dependencies>
-          <dependency>
-            <groupId>javax.ws.rs</groupId>
-            <artifactId>javax.ws.rs-api</artifactId>
-            <version>2.1.1</version>
-          </dependency>
-          <dependency>
-            <groupId>io.swagger.core.v3</groupId>
-            <artifactId>swagger-jaxrs2</artifactId>
-            <version>2.2.8</version>
-          </dependency>
-        </dependencies>
-      </plugin> -->
 
 
       <plugin>

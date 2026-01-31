@@ -1,4 +1,4 @@
-package com.yatmk.test.adapter.listener;
+package com.yatmk.test.adapter.events;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -9,7 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 @SpringBootConfiguration
 @EnableAutoConfiguration
-public class ListenerApplicationTests {
+public class EventsApplicationTests {
 
     @Test
     public void contextLoads() {

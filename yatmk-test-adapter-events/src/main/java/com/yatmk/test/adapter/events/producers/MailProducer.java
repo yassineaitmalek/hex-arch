@@ -1,6 +1,6 @@
-package com.yatmk.test.adapter.listener.producers;
+package com.yatmk.test.adapter.events.producers;
 
-import com.yatmk.test.adapter.listener.events.MailEvent;
+import com.yatmk.test.adapter.events.events.MailEvent;
 import java.util.Objects;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

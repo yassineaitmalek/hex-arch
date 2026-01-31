@@ -1,7 +1,7 @@
-package com.yatmk.test.adapter.listener.consumers;
+package com.yatmk.test.adapter.events.consumers;
 
-import com.yatmk.test.adapter.listener.events.MailEvent;
-import com.yatmk.test.adapter.listener.services.MailService;
+import com.yatmk.test.adapter.events.events.MailEvent;
+import com.yatmk.test.adapter.events.services.MailService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.Async;
