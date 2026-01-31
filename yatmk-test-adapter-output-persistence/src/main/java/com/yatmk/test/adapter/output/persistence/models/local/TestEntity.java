@@ -25,15 +25,17 @@ import org.hibernate.envers.Audited;
 @Table(name = "TEST_ENTITY_TABLE")
 public class TestEntity extends BaseEntity {
 
-    @Column(name = "ATTR1")
+    private static final String TABLE_PREFIX = "TAB_";
+
+    @Column(name = TABLE_PREFIX + "ATTR1")
     private String attr1;
 
-    @Column(name = "ATTR2")
+    @Column(name = TABLE_PREFIX + "ATTR2")
     private BigInteger attr2;
 
-    @Column(name = "ATTR3")
+    @Column(name = TABLE_PREFIX + "ATTR3")
     private Boolean attr3;
 
-    @Column(name = "ATTR4")
+    @Column(name = TABLE_PREFIX + "ATTR4")
     private BigDecimal attr4;
 }
