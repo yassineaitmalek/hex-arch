@@ -41,11 +41,11 @@ public class JpaTestEntityRepositoryTest {
 
     private long getId() {
         return jpaTestEntityRepository
-            .findAll()
-            .stream()
-            .findAny()
-            .map(TestEntity::getId)
-            .orElseThrow(() -> new RuntimeException("No id found"));
+                .findAll()
+                .stream()
+                .findAny()
+                .map(TestEntity::getId)
+                .orElseThrow(() -> new RuntimeException("No id found"));
     }
 
     @Test
