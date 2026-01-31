@@ -11,6 +11,11 @@ import com.yatmk.test.ports.output.TestPort;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.history.Revision;
@@ -20,6 +25,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 @RequiredArgsConstructor
 public class TestEntityRepository implements TestPort {
+
+    @PersistenceContext
+    private final EntityManager entityManager;
 
     private final JpaTestEntityRepository jpaTestEntityRepository;
 
@@ -83,5 +91,24 @@ public class TestEntityRepository implements TestPort {
             .map(jpaTestEntityRepository::save)
             .map(testEntityMapper::toDTO)
             .orElseThrow(() -> new ServerSideException("error while saving the test"));
+    }
+
+    private List<TestEntity> findAll() {
+        Query query = entityManager.createQuery("SELECT p FROM TestEntity p ", TestEntity.class);
+        return query.getResultList();
+    }
+
+    private TestEntity findById(Long id) {
+        Query query = entityManager.createQuery("SELECT p FROM TestEntity p where p.id = :id", TestEntity.class);
+        query.setParameter("id", id);
+        return (TestEntity) query.getSingleResult();
+    }
+
+    private Long count() {
+        CriteriaQuery cq = entityManager.getCriteriaBuilder().createQuery();
+        Root<TestEntity> rt = cq.from(TestEntity.class);
+        cq.select(entityManager.getCriteriaBuilder().count(rt));
+        Query q = entityManager.createQuery(cq);
+        return (Long) q.getSingleResult();
     }
 }

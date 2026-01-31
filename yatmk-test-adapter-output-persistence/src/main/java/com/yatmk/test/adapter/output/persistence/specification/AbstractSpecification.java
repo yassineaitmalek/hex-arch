@@ -10,7 +10,7 @@ public interface AbstractSpecification {
     }
 
     public static <T, U> Optional<Specification<U>> transformer(T object, Function<T, Specification<U>> mapper) {
-        return Optional.ofNullable(object).map(e -> Optional.ofNullable(mapper.apply(e))).orElseGet(Optional::empty);
+        return Optional.ofNullable(object).map(mapper::apply);
     }
 
     public static <T> Specification<T> distinct() {

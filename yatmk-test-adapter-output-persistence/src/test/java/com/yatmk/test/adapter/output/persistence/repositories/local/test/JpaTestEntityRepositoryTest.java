@@ -39,6 +39,15 @@ public class JpaTestEntityRepositoryTest {
         jpaTestEntityRepository.deleteAll();
     }
 
+    private long getId() {
+        return jpaTestEntityRepository
+            .findAll()
+            .stream()
+            .findAny()
+            .map(TestEntity::getId)
+            .orElseThrow(() -> new RuntimeException("No id found"));
+    }
+
     @Test
     public void testFindAll() {
         List<TestEntity> entities = jpaTestEntityRepository.findAll();
@@ -48,7 +57,7 @@ public class JpaTestEntityRepositoryTest {
 
     @Test
     public void testFindById() {
-        Long id = jpaTestEntityRepository.findAll().stream().findAny().map(TestEntity::getId).orElseGet(() -> null);
+        Long id = getId();
         Optional<TestEntity> entity = jpaTestEntityRepository.findById(id);
         Assertions.assertTrue(entity.isPresent());
         Assertions.assertNotNull(entity.get().getAttr1());
@@ -59,8 +68,12 @@ public class JpaTestEntityRepositoryTest {
 
     @Test
     public void testDeleteById() {
-        Long id = jpaTestEntityRepository.findAll().stream().findAny().map(TestEntity::getId).orElseGet(() -> null);
+        Long id = getId();
 
         jpaTestEntityRepository.deleteById(id);
+
+        Optional<TestEntity> entity = jpaTestEntityRepository.findById(id);
+
+        Assertions.assertFalse(entity.isPresent());
     }
 }
