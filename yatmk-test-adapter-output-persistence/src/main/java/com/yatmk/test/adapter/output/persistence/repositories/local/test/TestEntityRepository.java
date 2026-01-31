@@ -61,8 +61,7 @@ public class TestEntityRepository implements TestPort {
     public TestDTO get(Long id) {
         return Optional
             .ofNullable(id)
-            .map(jpaTestEntityRepository::findById)
-            .map(Optional::get)
+            .flatMap(jpaTestEntityRepository::findById)
             .map(testEntityMapper::toDTO)
             .orElseThrow(() -> new ResourceNotFoundException("test with id " + id + " not found"));
     }

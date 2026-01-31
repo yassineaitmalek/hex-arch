@@ -30,9 +30,9 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name = "test", description = "Operations for Test ")
 public class TestController implements AbstractController {
 
-    private static final String PATH = "/api/test";
+    public static final String PATH = "/api/test";
 
-    private static final String PATH_FRAGMENT = "/{id}";
+    public static final String PATH_FRAGMENT = "/{id}";
 
     private final TestUseCase testUseCase;
 

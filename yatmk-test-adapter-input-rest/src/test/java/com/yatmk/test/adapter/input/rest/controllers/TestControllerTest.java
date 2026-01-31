@@ -51,10 +51,14 @@ public class TestControllerTest {
     private TestUseCase testUseCase;
 
     @BeforeEach
-    void before() {}
+    public void before() {
+        //
+    }
 
     @AfterEach
-    void after() {}
+    public void after() {
+        //
+    }
 
     @Test
     public void printAllEndpoints() {

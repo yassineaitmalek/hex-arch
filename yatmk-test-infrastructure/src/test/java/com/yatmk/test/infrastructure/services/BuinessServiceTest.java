@@ -44,6 +44,11 @@ public class BuinessServiceTest {
     }
 
     @Test
+    public void testMethod() {
+        assertNotNull(testPort); // Now it's initialized!
+    }
+
+    @Test
     public void testCreate() {
         TestCreation creation = new TestCreation("Test Name", BigInteger.ONE, Boolean.FALSE, BigDecimal.TEN);
 
