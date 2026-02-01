@@ -1,7 +1,7 @@
 package com.yatmk.test.adapter.events.events;
 
+import java.io.InputStream;
 import java.util.List;
-import javax.activation.DataSource;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -21,7 +21,7 @@ public class MailEvent extends ApplicationEvent {
 
     private String body;
 
-    private List<MailFile> files;
+    private List<MailFile> attachments;
 
     /**
      * @param to
@@ -36,14 +36,14 @@ public class MailEvent extends ApplicationEvent {
         List<String> copy,
         String subject,
         String body,
-        List<MailFile> files
+        List<MailFile> attachments
     ) {
         super(source);
         this.to = to;
         this.copy = copy;
         this.subject = subject;
         this.body = body;
-        this.files = files;
+        this.attachments = attachments;
     }
 
     @Setter
@@ -53,7 +53,9 @@ public class MailEvent extends ApplicationEvent {
     @AllArgsConstructor
     public static class MailFile {
 
-        private DataSource dataSource;
+        private InputStream inputStream;
+
+        private String contentType;
 
         private String fileName;
 

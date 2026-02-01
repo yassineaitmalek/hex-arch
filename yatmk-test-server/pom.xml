@@ -49,6 +49,14 @@
 
     <dependency>
       <groupId>com.yatmk</groupId>
+      <artifactId>yatmk-test-adapter-events</artifactId>
+      <version>${project.version}</version>
+      <scope>provided</scope>
+    </dependency>
+
+
+    <dependency>
+      <groupId>com.yatmk</groupId>
       <artifactId>yatmk-test-adapter-input-rest</artifactId>
       <version>${project.version}</version>
       <scope>provided</scope>

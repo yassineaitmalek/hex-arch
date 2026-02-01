@@ -13,6 +13,7 @@ import org.springframework.context.annotation.ComponentScan;
         "com.yatmk.test.infrastructure",
         "com.yatmk.test.common",
         "com.yatmk.test.adapter.output.persistence",
+        "com.yatmk.test.adapter.events",
         "com.yatmk.test.adapter.input.rest",
     }
 )

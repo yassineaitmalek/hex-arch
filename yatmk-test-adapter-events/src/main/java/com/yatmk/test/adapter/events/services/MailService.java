@@ -9,6 +9,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import javax.activation.DataHandler;
+import javax.activation.DataSource;
 import javax.mail.Message.RecipientType;
 import javax.mail.MessagingException;
 import javax.mail.Multipart;
@@ -17,6 +18,7 @@ import javax.mail.Session;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
+import javax.mail.util.ByteArrayDataSource;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -117,23 +119,27 @@ public class MailService {
         }
     }
 
+    private Long getAttachmentsSize(MailEvent mailEvent) {
+        return Optional
+            .ofNullable(mailEvent)
+            .map(MailEvent::getAttachments)
+            .orElseGet(Collections::emptyList)
+            .stream()
+            .filter(Objects::nonNull)
+            .map(MailFile::getFileSize)
+            .reduce(0l, (a, b) -> a + b);
+    }
+
     private MimeMessage sendFiles(MailEvent mailEvent, Multipart multipart, MimeMessage message) {
         try {
-            Long totalSize = Optional
-                .ofNullable(mailEvent)
-                .map(MailEvent::getFiles)
-                .orElseGet(Collections::emptyList)
-                .stream()
-                .filter(Objects::nonNull)
-                .map(MailFile::getFileSize)
-                .reduce(0l, (a, b) -> a + b);
+            Long totalSize = getAttachmentsSize(mailEvent);
             if (totalSize >= EMAIL_LIMIT_SIZE) {
                 throw new ServerSideException("The total attachment size exceeds the limit");
             }
 
             Optional
                 .ofNullable(mailEvent)
-                .map(MailEvent::getFiles)
+                .map(MailEvent::getAttachments)
                 .orElseGet(Collections::emptyList)
                 .stream()
                 .filter(Objects::nonNull)
@@ -149,7 +155,8 @@ public class MailService {
     private Multipart sendFile(MailFile mailFile, Multipart multipart) {
         try {
             MimeBodyPart attachmentBodyPart = new MimeBodyPart();
-            attachmentBodyPart.setDataHandler(new DataHandler(mailFile.getDataSource()));
+            DataSource dataSource = new ByteArrayDataSource(mailFile.getInputStream(), mailFile.getContentType());
+            attachmentBodyPart.setDataHandler(new DataHandler(dataSource));
             attachmentBodyPart.setFileName(mailFile.getFileName());
             attachmentBodyPart.setDisposition(Part.ATTACHMENT);
             multipart.addBodyPart(attachmentBodyPart);
