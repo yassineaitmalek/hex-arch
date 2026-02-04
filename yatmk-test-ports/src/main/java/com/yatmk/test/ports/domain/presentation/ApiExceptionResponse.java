@@ -16,6 +16,8 @@ import lombok.Setter;
 @AllArgsConstructor
 public class ApiExceptionResponse {
 
+    private String id;
+
     private String message;
 
     private String status;

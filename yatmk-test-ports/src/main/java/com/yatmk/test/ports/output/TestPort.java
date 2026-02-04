@@ -1,9 +1,10 @@
 package com.yatmk.test.ports.output;
 
-import com.yatmk.test.ports.domain.dto.TestCreation;
-import com.yatmk.test.ports.domain.dto.TestDTO;
-import com.yatmk.test.ports.domain.dto.TestUpdate;
 import java.util.List;
+
+import com.yatmk.test.ports.domain.test.TestCreation;
+import com.yatmk.test.ports.domain.test.TestDTO;
+import com.yatmk.test.ports.domain.test.TestUpdate;
 
 public interface TestPort {
     public TestDTO save(TestCreation testCreation);

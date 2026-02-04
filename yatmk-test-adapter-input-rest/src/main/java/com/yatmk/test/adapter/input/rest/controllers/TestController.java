@@ -1,10 +1,11 @@
 package com.yatmk.test.adapter.input.rest.controllers;
 
-import com.yatmk.test.adapter.input.rest.config.AbstractController;
-import com.yatmk.test.ports.domain.dto.TestCreation;
-import com.yatmk.test.ports.domain.dto.TestDTO;
-import com.yatmk.test.ports.domain.dto.TestUpdate;
+import com.yatmk.test.adapter.input.rest.config.AbstractRequestController;
+import com.yatmk.test.adapter.input.rest.config.AbstractResponseController;
 import com.yatmk.test.ports.domain.presentation.ApiDataResponse;
+import com.yatmk.test.ports.domain.test.TestCreation;
+import com.yatmk.test.ports.domain.test.TestDTO;
+import com.yatmk.test.ports.domain.test.TestUpdate;
 import com.yatmk.test.ports.input.TestUseCase;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -28,7 +29,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @RequestMapping(TestController.PATH)
 @Tag(name = "test", description = "Operations for Test ")
-public class TestController implements AbstractController {
+public class TestController implements AbstractResponseController, AbstractRequestController {
 
     public static final String PATH = "/api/test";
 
@@ -61,11 +62,7 @@ public class TestController implements AbstractController {
     }
 
     @Operation(summary = "Update test by ID")
-    @PatchMapping(
-        value = PATH_FRAGMENT,
-        consumes = MediaType.APPLICATION_JSON_VALUE,
-        produces = MediaType.APPLICATION_JSON_VALUE
-    )
+    @PatchMapping(value = PATH_FRAGMENT, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ApiDataResponse<TestDTO>> update(@PathVariable Long id, @RequestBody TestUpdate update) {
         return ok(() -> testUseCase.update(id, update));
     }

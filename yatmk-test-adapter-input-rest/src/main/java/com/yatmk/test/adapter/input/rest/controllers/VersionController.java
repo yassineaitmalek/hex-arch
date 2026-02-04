@@ -1,6 +1,8 @@
 package com.yatmk.test.adapter.input.rest.controllers;
 
-import com.yatmk.test.adapter.input.rest.config.AbstractController;
+import com.yatmk.test.adapter.input.rest.config.AbstractRequestController;
+import com.yatmk.test.adapter.input.rest.config.AbstractResponseController;
+import com.yatmk.test.adapter.input.rest.config.DefaultHeaders;
 import com.yatmk.test.adapter.input.rest.config.properties.AppVersionProperies;
 import com.yatmk.test.ports.domain.dto.VersionDTO;
 import com.yatmk.test.ports.domain.presentation.ApiDataResponse;
@@ -16,9 +18,10 @@ import org.springframework.web.bind.annotation.RestController;
 @Validated
 @RestController
 @Tag(name = "version")
+// @DefaultHeaders
 @RequiredArgsConstructor
 @RequestMapping("/api/version")
-public class VersionController implements AbstractController {
+public class VersionController implements AbstractResponseController, AbstractRequestController {
 
     private final AppVersionProperies appVersionProperies;
 

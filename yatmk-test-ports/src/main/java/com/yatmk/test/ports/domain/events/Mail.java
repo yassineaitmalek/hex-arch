@@ -1,4 +1,4 @@
-package com.yatmk.test.ports.domain.dto;
+package com.yatmk.test.ports.domain.events;
 
 import java.io.InputStream;
 import java.util.List;
@@ -13,7 +13,7 @@ import lombok.Setter;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class MailDTO {
+public class Mail {
 
     private List<String> to;
 
@@ -23,14 +23,14 @@ public class MailDTO {
 
     private String body;
 
-    private List<MailFileDTO> attachments;
+    private List<MailFile> attachments;
 
     @Setter
     @Getter
     @Builder
     @NoArgsConstructor
     @AllArgsConstructor
-    public static class MailFileDTO {
+    public static class MailFile {
 
         private InputStream inputStream;
 

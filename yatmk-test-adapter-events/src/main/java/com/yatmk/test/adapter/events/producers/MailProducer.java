@@ -1,7 +1,7 @@
 package com.yatmk.test.adapter.events.producers;
 
 import com.yatmk.test.adapter.events.events.MailEvent;
-import com.yatmk.test.ports.domain.dto.MailDTO;
+import com.yatmk.test.ports.domain.events.Mail;
 import com.yatmk.test.ports.events.SendMailEvent;
 import java.util.Collections;
 import java.util.Objects;
@@ -18,18 +18,17 @@ public class MailProducer implements SendMailEvent {
     private final ApplicationEventPublisher eventPublisher;
 
     @Override
-    public void send(MailDTO mailDTO) {
+    public void send(Mail mail) {
         log.info("sending email ...");
 
-        if (Objects.nonNull(mailDTO)) {
+        if (Objects.nonNull(mail)) {
             MailEvent mailEvent = new MailEvent(
-                this,
-                mailDTO.getTo(),
-                mailDTO.getCopy(),
-                mailDTO.getSubject(),
-                mailDTO.getBody(),
-                Collections.emptyList()
-            );
+                    this,
+                    mail.getTo(),
+                    mail.getCopy(),
+                    mail.getSubject(),
+                    mail.getBody(),
+                    Collections.emptyList());
 
             eventPublisher.publishEvent(mailEvent);
         }

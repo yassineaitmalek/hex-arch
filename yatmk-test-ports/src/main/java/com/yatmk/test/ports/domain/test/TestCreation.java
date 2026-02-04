@@ -1,4 +1,4 @@
-package com.yatmk.test.ports.domain.dto;
+package com.yatmk.test.ports.domain.test;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;

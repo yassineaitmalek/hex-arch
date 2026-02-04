@@ -1,4 +1,4 @@
-package com.yatmk.test.ports.domain.dto;
+package com.yatmk.test.ports.domain.test;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -11,9 +11,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class TestDTO {
-
-    private Long id;
+public class TestUpdate {
 
     private String attr1;
 

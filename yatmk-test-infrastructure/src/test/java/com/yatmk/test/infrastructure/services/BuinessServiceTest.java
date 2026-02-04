@@ -8,9 +8,9 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import com.yatmk.test.ports.domain.dto.TestCreation;
-import com.yatmk.test.ports.domain.dto.TestDTO;
-import com.yatmk.test.ports.domain.dto.TestUpdate;
+import com.yatmk.test.ports.domain.test.TestCreation;
+import com.yatmk.test.ports.domain.test.TestDTO;
+import com.yatmk.test.ports.domain.test.TestUpdate;
 import com.yatmk.test.ports.output.TestPort;
 import java.math.BigDecimal;
 import java.math.BigInteger;

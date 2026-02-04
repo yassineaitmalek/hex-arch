@@ -1,7 +1,7 @@
 package com.yatmk.test.ports.events;
 
-import com.yatmk.test.ports.domain.dto.MailDTO;
+import com.yatmk.test.ports.domain.events.Mail;
 
 public interface SendMailEvent {
-    public void send(MailDTO mailDTO);
+    public void send(Mail mail);
 }

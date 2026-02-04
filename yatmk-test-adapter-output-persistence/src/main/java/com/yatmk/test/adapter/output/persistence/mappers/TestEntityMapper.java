@@ -1,9 +1,10 @@
 package com.yatmk.test.adapter.output.persistence.mappers;
 
 import com.yatmk.test.adapter.output.persistence.models.local.TestEntity;
-import com.yatmk.test.ports.domain.dto.TestCreation;
-import com.yatmk.test.ports.domain.dto.TestDTO;
-import com.yatmk.test.ports.domain.dto.TestUpdate;
+import com.yatmk.test.ports.domain.test.TestCreation;
+import com.yatmk.test.ports.domain.test.TestDTO;
+import com.yatmk.test.ports.domain.test.TestUpdate;
+
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 

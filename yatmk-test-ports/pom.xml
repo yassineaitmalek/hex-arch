@@ -168,6 +168,7 @@
         <version>${jacoco.version}</version>
       </plugin>
 
+      <!-- 
       <plugin>
         <groupId>com.diffplug.spotless</groupId>
         <artifactId>spotless-maven-plugin</artifactId>
@@ -179,7 +180,8 @@
             </goals>
           </execution>
         </executions>
-      </plugin>
+      </plugin> 
+      -->
 
     </plugins>
   </build>
