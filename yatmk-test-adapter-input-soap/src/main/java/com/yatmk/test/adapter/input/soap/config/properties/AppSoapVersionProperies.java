@@ -1,4 +1,4 @@
-package com.yatmk.test.adapter.input.rest.config.properties;
+package com.yatmk.test.adapter.input.soap.config.properties;
 
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @RequiredArgsConstructor
 @ConfigurationProperties(prefix = "app")
-public class AppVersionProperies {
+public class AppSoapVersionProperies {
 
     private String version;
 }
