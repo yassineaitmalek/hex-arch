@@ -8,8 +8,7 @@ import org.springframework.scheduling.annotation.EnableAsync;
 
 @EnableAsync
 @SpringBootApplication
-@ComponentScan(
-    basePackages = {
+@ComponentScan(basePackages = {
         "com.yatmk.test.server",
         "com.yatmk.test.ports",
         "com.yatmk.test.infrastructure",
@@ -17,8 +16,8 @@ import org.springframework.scheduling.annotation.EnableAsync;
         "com.yatmk.test.adapter.output.persistence",
         "com.yatmk.test.adapter.events",
         "com.yatmk.test.adapter.input.rest",
-    }
-)
+        "com.yatmk.test.adapter.input.soap",
+})
 @RequiredArgsConstructor
 public class Application {
 

@@ -63,6 +63,14 @@
     </dependency>
 
     <dependency>
+      <groupId>com.yatmk</groupId>
+      <artifactId>yatmk-test-adapter-input-soap</artifactId>
+      <version>${project.version}</version>
+      <scope>provided</scope>
+    </dependency>
+
+
+    <dependency>
       <groupId>io.vavr</groupId>
       <artifactId>vavr</artifactId>
     </dependency>
