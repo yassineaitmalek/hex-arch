@@ -20,7 +20,6 @@ npm-debug.log.*
 ######################
 .sass-cache/
 .scannerwork
-logs/
 ######################
 # Eclipse
 ######################
