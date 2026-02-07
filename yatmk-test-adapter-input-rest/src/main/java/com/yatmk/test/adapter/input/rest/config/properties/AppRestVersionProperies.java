@@ -8,8 +8,12 @@ import org.springframework.context.annotation.Configuration;
 @Data
 @Configuration
 @RequiredArgsConstructor
-@ConfigurationProperties(prefix = "app")
+@ConfigurationProperties(prefix = "spring.application")
 public class AppRestVersionProperies {
 
     private String version;
+
+    private String name;
+
+    private String title;
 }
