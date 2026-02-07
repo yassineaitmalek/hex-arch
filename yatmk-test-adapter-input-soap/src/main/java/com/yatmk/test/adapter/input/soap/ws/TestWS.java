@@ -1,11 +1,8 @@
 package com.yatmk.test.adapter.input.soap.ws;
 
-import javax.jws.WebMethod;
-import javax.jws.WebParam;
-import javax.jws.WebService;
-
 import org.springframework.stereotype.Component;
 
+import com.yatmk.test.adapter.input.soap.sei.TestSEI;
 import com.yatmk.test.ports.domain.test.TestCreation;
 import com.yatmk.test.ports.domain.test.TestDTO;
 import com.yatmk.test.ports.domain.test.TestUpdate;
@@ -15,31 +12,30 @@ import lombok.RequiredArgsConstructor;
 
 @Component
 @RequiredArgsConstructor
-@WebService(serviceName = "test-ws")
-public class TestWS {
+public class TestWS implements TestSEI {
 
   private final TestUseCase testUseCase;
 
-  @WebMethod(operationName = "createTest")
-  public TestDTO createTest(@WebParam(name = "testCreation") TestCreation testCreation) {
+  @Override
+  public TestDTO createTest(TestCreation testCreation) {
     return testUseCase.create(testCreation);
   }
 
-  @WebMethod(operationName = "deleteTest")
-  public boolean deleteTest(@WebParam(name = "id") Long id) {
+  @Override
+  public boolean deleteTest(Long id) {
     testUseCase.delete(id);
     return Boolean.TRUE;
   }
 
-  @WebMethod(operationName = "getTest")
-  public TestDTO getTest(@WebParam(name = "id") Long id) {
+  @Override
+  public TestDTO getTest(Long id) {
     return testUseCase.get(id);
   }
 
-  @WebMethod(operationName = "updateTest")
+  @Override
   public TestDTO updateTest(
-      @WebParam(name = "id") Long id,
-      @WebParam(name = "testUpdate") TestUpdate update) {
+      Long id,
+      TestUpdate update) {
     return testUseCase.update(id, update);
   }
 }

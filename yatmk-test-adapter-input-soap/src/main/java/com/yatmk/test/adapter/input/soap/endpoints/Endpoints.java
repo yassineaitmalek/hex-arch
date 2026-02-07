@@ -10,8 +10,8 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.yatmk.test.adapter.input.soap.ws.TestWS;
-import com.yatmk.test.adapter.input.soap.ws.VersionWS;
+import com.yatmk.test.adapter.input.soap.sei.TestSEI;
+import com.yatmk.test.adapter.input.soap.sei.VersionSEI;
 
 import lombok.RequiredArgsConstructor;
 
@@ -20,15 +20,15 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class Endpoints {
 
-  private final TestWS testWS;
+  private final TestSEI testsSEI;
 
-  private final VersionWS versionWS;
+  private final VersionSEI versionSEI;
 
   private final Bus bus;
 
   @Bean
   public Endpoint getTestEndpoint() {
-    EndpointImpl endpoint = new EndpointImpl(bus, testWS);
+    EndpointImpl endpoint = new EndpointImpl(bus, testsSEI);
     Map<String, Object> properties = endpoint.getProperties();
     properties.put("mtom-enabled", true);
     endpoint.publish("/test");
@@ -37,7 +37,7 @@ public class Endpoints {
 
   @Bean
   public Endpoint getVersionEndpoint() {
-    EndpointImpl endpoint = new EndpointImpl(bus, versionWS);
+    EndpointImpl endpoint = new EndpointImpl(bus, versionSEI);
     Map<String, Object> properties = endpoint.getProperties();
     properties.put("mtom-enabled", true);
     endpoint.publish("/version");

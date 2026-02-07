@@ -7,14 +7,19 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.boot.test.web.server.LocalServerPort;
 
+import com.yatmk.test.adapter.input.soap.sei.TestSEI;
 import com.yatmk.test.ports.domain.test.TestDTO;
 import com.yatmk.test.ports.input.TestUseCase;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class TestWSIntegrationTest {
 
-  private TestWS client;
+  @LocalServerPort
+  private int port;
+
+  private TestSEI client;
 
   @MockBean
   private TestUseCase testUseCase;
@@ -22,13 +27,13 @@ public class TestWSIntegrationTest {
   @BeforeEach
   public void setup() {
     JaxWsProxyFactoryBean factory = new JaxWsProxyFactoryBean();
-    factory.setServiceClass(TestWS.class);
+    factory.setServiceClass(TestSEI.class);
 
     // Constructs:
-    String address = "http://localhost:8080/yatmk-api-test/ws/test";
+    String address = "http://localhost:" + port + "/yatmk-api-test/ws/test";
 
     factory.setAddress(address);
-    client = (TestWS) factory.create();
+    client = (TestSEI) factory.create();
   }
 
   @Test
