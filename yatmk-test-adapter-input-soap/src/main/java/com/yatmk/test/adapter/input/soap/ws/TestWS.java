@@ -1,5 +1,7 @@
 package com.yatmk.test.adapter.input.soap.ws;
 
+import javax.jws.WebService;
+
 import org.springframework.stereotype.Component;
 
 import com.yatmk.test.adapter.input.soap.sei.TestSEI;
@@ -12,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 
 @Component
 @RequiredArgsConstructor
+@WebService(endpointInterface = "com.yatmk.test.adapter.input.soap.sei.TestSEI", serviceName = "test-ws", targetNamespace = "http://ws.soap.input.adapter.test.yatmk.com/")
 public class TestWS implements TestSEI {
 
   private final TestUseCase testUseCase;
