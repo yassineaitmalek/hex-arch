@@ -7,3 +7,4 @@
                                                                                                                       
 ${spring.application.title} ${spring.application.version}
 Powered by Spring Boot ${spring-boot.version}
+to generate your own visit => https://devops.datenkollektiv.de/banner.txt/index.html
