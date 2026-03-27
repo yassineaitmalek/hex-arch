@@ -35,6 +35,13 @@
 
     <dependency>
       <groupId>com.yatmk</groupId>
+      <artifactId>yatmk-test-common</artifactId>
+      <version>${project.version}</version>
+      <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>com.yatmk</groupId>
       <artifactId>yatmk-test-infrastructure</artifactId>
       <version>${project.version}</version>
       <scope>provided</scope>
@@ -62,12 +69,12 @@
       <scope>provided</scope>
     </dependency>
 
-    <dependency>
+    <!-- <dependency>
       <groupId>com.yatmk</groupId>
       <artifactId>yatmk-test-adapter-input-soap</artifactId>
       <version>${project.version}</version>
       <scope>provided</scope>
-    </dependency>
+    </dependency> -->
 
 
     <dependency>

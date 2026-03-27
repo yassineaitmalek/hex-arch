@@ -24,10 +24,28 @@
 
     <dependencies>
 
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+            <exclusions>
+
+            </exclusions>
+        </dependency>
 
         <dependency>
             <groupId>io.vavr</groupId>
             <artifactId>vavr</artifactId>
+        </dependency>
+
+
+        <dependency>
+            <groupId>com.google.zxing</groupId>
+            <artifactId>core</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.zxing</groupId>
+            <artifactId>javase</artifactId>
         </dependency>
 
 
