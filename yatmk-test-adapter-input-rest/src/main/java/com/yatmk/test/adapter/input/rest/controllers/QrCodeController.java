@@ -1,7 +1,6 @@
 package com.yatmk.test.adapter.input.rest.controllers;
 
 import java.io.InputStream;
-import java.util.Objects;
 import java.util.UUID;
 
 import org.springdoc.api.annotations.ParameterObject;

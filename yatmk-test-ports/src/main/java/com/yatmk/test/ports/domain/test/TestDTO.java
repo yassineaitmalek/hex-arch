@@ -2,12 +2,15 @@ package com.yatmk.test.ports.domain.test;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
