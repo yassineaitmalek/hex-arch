@@ -49,7 +49,7 @@ public class QrCodeController implements AbstractResponseController {
     @ApiResponse(responseCode = "200", description = "QR Code decoded successfully", content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE))
     @PutMapping(value = "/decode", consumes = {
             MediaType.MULTIPART_FORM_DATA_VALUE }, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ApiDataResponse<String>> decode(@ModelAttribute FileInput input) {
+    public ResponseEntity<ApiDataResponse<String>> decode(@ParameterObject @ModelAttribute FileInput input) {
 
         Assert.notNull(input);
         Assert.notNull(input.getFile());
