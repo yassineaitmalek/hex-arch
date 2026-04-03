@@ -63,11 +63,11 @@ public class TestControllerTest {
     @Test
     public void printAllEndpoints() {
         handlerMapping
-                .getHandlerMethods()
-                .forEach((info, method) -> {
-                    String methodName = info.getMethodsCondition() + " " + info.getDirectPaths();
-                    System.out.println(methodName);
-                });
+            .getHandlerMethods()
+            .forEach((info, method) -> {
+                String methodName = info.getMethodsCondition() + " " + info.getDirectPaths();
+                System.out.println(methodName);
+            });
     }
 
     @Test
@@ -78,20 +78,19 @@ public class TestControllerTest {
         Mockito.when(testUseCase.create(Mockito.any(TestCreation.class))).thenReturn(uiDTO);
 
         MockHttpServletRequestBuilder request = MockMvcRequestBuilders
-                .post(PATH)
-                .contentType(MediaType.APPLICATION_JSON_VALUE)
-                .content(objectMapper.writeValueAsString(inputDTO));
+            .post(PATH)
+            .contentType(MediaType.APPLICATION_JSON_VALUE)
+            .content(objectMapper.writeValueAsString(inputDTO));
 
         ResultActions response = mockMvc.perform(request);
 
         response
-                .andExpect(MockMvcResultMatchers.status().isCreated())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data.id", CoreMatchers.is(uiDTO.getId().intValue())))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data.attr1", CoreMatchers.is(uiDTO.getAttr1())))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data.attr2", CoreMatchers.is(uiDTO.getAttr2().intValue())))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data.attr3", CoreMatchers.is(uiDTO.getAttr3())))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data.attr4",
-                        CoreMatchers.is(uiDTO.getAttr4().doubleValue())));
+            .andExpect(MockMvcResultMatchers.status().isCreated())
+            .andExpect(MockMvcResultMatchers.jsonPath("$.data.id", CoreMatchers.is(uiDTO.getId().intValue())))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.data.attr1", CoreMatchers.is(uiDTO.getAttr1())))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.data.attr2", CoreMatchers.is(uiDTO.getAttr2().intValue())))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.data.attr3", CoreMatchers.is(uiDTO.getAttr3())))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.data.attr4", CoreMatchers.is(uiDTO.getAttr4().doubleValue())));
     }
 
     @Test
@@ -122,13 +121,12 @@ public class TestControllerTest {
         ResultActions response = mockMvc.perform(request);
 
         response
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data.id", CoreMatchers.is(uiDTO.getId().intValue())))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data.attr1", CoreMatchers.is(uiDTO.getAttr1())))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data.attr2", CoreMatchers.is(uiDTO.getAttr2().intValue())))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data.attr3", CoreMatchers.is(uiDTO.getAttr3())))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data.attr4",
-                        CoreMatchers.is(uiDTO.getAttr4().doubleValue())));
+            .andExpect(MockMvcResultMatchers.status().isOk())
+            .andExpect(MockMvcResultMatchers.jsonPath("$.data.id", CoreMatchers.is(uiDTO.getId().intValue())))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.data.attr1", CoreMatchers.is(uiDTO.getAttr1())))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.data.attr2", CoreMatchers.is(uiDTO.getAttr2().intValue())))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.data.attr3", CoreMatchers.is(uiDTO.getAttr3())))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.data.attr4", CoreMatchers.is(uiDTO.getAttr4().doubleValue())));
     }
 
     @Test
@@ -148,19 +146,18 @@ public class TestControllerTest {
         Assertions.assertNotEquals(inputDTO.getAttr4(), uiDTO.getAttr4());
 
         MockHttpServletRequestBuilder request = MockMvcRequestBuilders
-                .patch(PATH_FRAGMENT, id)
-                .contentType(MediaType.APPLICATION_JSON_VALUE)
-                .content(objectMapper.writeValueAsString(inputDTO));
+            .patch(PATH_FRAGMENT, id)
+            .contentType(MediaType.APPLICATION_JSON_VALUE)
+            .content(objectMapper.writeValueAsString(inputDTO));
 
         ResultActions response = mockMvc.perform(request);
 
         response
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data.id", CoreMatchers.is(uiDTO.getId().intValue())))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data.attr1", CoreMatchers.is(uiDTO.getAttr1())))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data.attr2", CoreMatchers.is(uiDTO.getAttr2().intValue())))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data.attr3", CoreMatchers.is(uiDTO.getAttr3())))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data.attr4",
-                        CoreMatchers.is(uiDTO.getAttr4().doubleValue())));
+            .andExpect(MockMvcResultMatchers.status().isOk())
+            .andExpect(MockMvcResultMatchers.jsonPath("$.data.id", CoreMatchers.is(uiDTO.getId().intValue())))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.data.attr1", CoreMatchers.is(uiDTO.getAttr1())))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.data.attr2", CoreMatchers.is(uiDTO.getAttr2().intValue())))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.data.attr3", CoreMatchers.is(uiDTO.getAttr3())))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.data.attr4", CoreMatchers.is(uiDTO.getAttr4().doubleValue())));
     }
 }

@@ -85,11 +85,16 @@
     </dependency>
 
 
-    <dependency>
+    <!-- <dependency>
       <groupId>org.springdoc</groupId>
       <artifactId>springdoc-openapi-ui</artifactId>
-    </dependency>
+    </dependency> -->
 
+    <dependency>
+      <groupId>org.springdoc</groupId>
+      <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+      <version>2.5.0</version>
+    </dependency>
 
     <dependency>
       <groupId>org.modelmapper</groupId>
@@ -199,6 +204,26 @@
         <version>${jacoco.version}</version>
       </plugin>
 
+      <plugin>
+        <groupId>org.springdoc</groupId>
+        <artifactId>springdoc-openapi-maven-plugin</artifactId>
+        <version>1.6</version>
+        <executions>
+          <execution>
+            <phase>verify</phase>
+            <goals>
+              <goal>generate</goal>
+            </goals>
+            <configuration>
+              <apiDocsUrl>http://localhost:8080/v3/api-docs</apiDocsUrl>
+              <outputFileName>openapi.yaml</outputFileName>
+              <outputDir>${project.build.directory}</outputDir>
+              <format>yaml</format>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
       <!-- <plugin>
         <groupId>io.swagger.core.v3</groupId>
         <artifactId>swagger-maven-plugin</artifactId>
@@ -265,7 +290,7 @@
         </dependencies>
       </plugin> -->
 
-      <!-- 
+
       <plugin>
         <groupId>com.diffplug.spotless</groupId>
         <artifactId>spotless-maven-plugin</artifactId>
@@ -273,12 +298,11 @@
           <execution>
             <phase>compile</phase>
             <goals>
-              <goal>check</goal>
+              <goal>apply</goal>
             </goals>
           </execution>
         </executions>
-      </plugin> 
-      -->
+      </plugin>
 
 
     </plugins>

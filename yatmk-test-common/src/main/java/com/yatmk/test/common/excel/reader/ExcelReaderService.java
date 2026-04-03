@@ -1,6 +1,9 @@
-
 package com.yatmk.test.common.excel.reader;
 
+import com.yatmk.test.common.excel.ExcelType;
+import com.yatmk.test.common.excel.components.reader.ExcelSheetData;
+import com.yatmk.test.common.utility.CheckUtility;
+import com.yatmk.test.common.utility.DateUtility;
 import java.io.InputStream;
 import java.util.Collections;
 import java.util.List;
@@ -9,7 +12,7 @@ import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-
+import lombok.RequiredArgsConstructor;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.DateUtil;
 import org.apache.poi.ss.usermodel.Row;
@@ -17,125 +20,103 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.stereotype.Service;
 
-import com.yatmk.test.common.excel.ExcelType;
-import com.yatmk.test.common.excel.components.reader.ExcelSheetData;
-import com.yatmk.test.common.utility.CheckUtility;
-import com.yatmk.test.common.utility.DateUtility;
-
-import lombok.RequiredArgsConstructor;
-
 @Service
 @RequiredArgsConstructor
 public class ExcelReaderService {
 
-  public List<ExcelSheetData> readExcel(InputStream in, ExcelType ext, boolean isHeader) {
-
-    try (Workbook workbook = ExcelType.loadWorkbook(in, ext)) {
-
-      AtomicInteger index = new AtomicInteger(0);
-      return IntStream.range(0, workbook.getNumberOfSheets())
-          .mapToObj(workbook::getSheetAt)
-          .map(e -> getSheetData(e, index, isHeader))
-          .collect(Collectors.toList());
-
-    } catch (Exception e) {
-      throw new RuntimeException(e);
+    public List<ExcelSheetData> readExcel(InputStream in, ExcelType ext, boolean isHeader) {
+        try (Workbook workbook = ExcelType.loadWorkbook(in, ext)) {
+            AtomicInteger index = new AtomicInteger(0);
+            return IntStream
+                .range(0, workbook.getNumberOfSheets())
+                .mapToObj(workbook::getSheetAt)
+                .map(e -> getSheetData(e, index, isHeader))
+                .collect(Collectors.toList());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
-  }
-
-  public int maxColumns(Sheet sheet) {
-
-    return IntStream.range(0, sheet
-        .getPhysicalNumberOfRows())
-        .mapToObj(sheet::getRow)
-        .filter(Objects::nonNull)
-        .map(Row::getPhysicalNumberOfCells)
-        .filter(Objects::nonNull)
-        .max(Integer::compareTo)
-        .filter(Objects::nonNull)
-        .orElseGet(() -> 0);
-
-  }
-
-  public ExcelSheetData getSheetData(Sheet sheet, AtomicInteger index, boolean isHeader) {
-
-    int maxColumns = maxColumns(sheet);
-    List<List<String>> rows = IntStream.range((isHeader) ? 1 : 0, sheet.getPhysicalNumberOfRows())
-        .mapToObj(sheet::getRow)
-        .map(row -> readLine(row, maxColumns))
-        .collect(Collectors.toList());
-
-    List<String> header = IntStream.range(0, (isHeader) ? 1 : 0)
-        .mapToObj(sheet::getRow)
-        .map(row -> readLine(row, maxColumns))
-        .findFirst()
-        .orElseGet(Collections::emptyList);
-
-    return ExcelSheetData.builder()
-        .sheetName(sheet.getSheetName())
-        .index(index.getAndIncrement())
-        .header(header)
-        .data(rows)
-        .nbRows(rows.size())
-        .nbColumns(maxColumns)
-        .build();
-  }
-
-  public String numericOrDate(Cell cell) {
-    int isCellDateFormatted = DateUtil.isCellDateFormatted(cell) ? 1 : 0;
-    switch (isCellDateFormatted) {
-      case 1:
-        return DateUtility.getSimpleDateFormat_YYYY_MM_DD().format(cell.getDateCellValue());
-      case 0:
-        return CheckUtility.formatDoubleXls(cell.getNumericCellValue());
-      default:
-        return null;
+    public int maxColumns(Sheet sheet) {
+        return IntStream
+            .range(0, sheet.getPhysicalNumberOfRows())
+            .mapToObj(sheet::getRow)
+            .filter(Objects::nonNull)
+            .map(Row::getPhysicalNumberOfCells)
+            .filter(Objects::nonNull)
+            .max(Integer::compareTo)
+            .filter(Objects::nonNull)
+            .orElseGet(() -> 0);
     }
 
-  }
+    public ExcelSheetData getSheetData(Sheet sheet, AtomicInteger index, boolean isHeader) {
+        int maxColumns = maxColumns(sheet);
+        List<List<String>> rows = IntStream
+            .range((isHeader) ? 1 : 0, sheet.getPhysicalNumberOfRows())
+            .mapToObj(sheet::getRow)
+            .map(row -> readLine(row, maxColumns))
+            .collect(Collectors.toList());
 
-  public String getCellValue(Cell cell) {
+        List<String> header = IntStream
+            .range(0, (isHeader) ? 1 : 0)
+            .mapToObj(sheet::getRow)
+            .map(row -> readLine(row, maxColumns))
+            .findFirst()
+            .orElseGet(Collections::emptyList);
 
-    switch (cell.getCellType()) {
-      case NUMERIC:
-        return numericOrDate(cell);
-      case STRING:
-        return CheckUtility.checkString(cell.getStringCellValue());
-      case BOOLEAN:
-        return String.valueOf(cell.getBooleanCellValue());
-      case FORMULA:
-        return String.valueOf(cell.getCellFormula());
-      case ERROR:
-        return String.valueOf(cell.getErrorCellValue());
-      default:
-        return null;
+        return ExcelSheetData
+            .builder()
+            .sheetName(sheet.getSheetName())
+            .index(index.getAndIncrement())
+            .header(header)
+            .data(rows)
+            .nbRows(rows.size())
+            .nbColumns(maxColumns)
+            .build();
     }
 
-  }
-
-  public List<String> readLine(Row row, int maxColumn) {
-
-    return IntStream.range(0, maxColumn)
-        .mapToObj(index -> readLineImpl(row, index))
-        .collect(Collectors.toList());
-
-  }
-
-  public String readLineImpl(Row row, int index) {
-    try {
-      return checkField(getCellValue(row.getCell(index)));
-    } catch (Exception e) {
-      return null;
+    public String numericOrDate(Cell cell) {
+        int isCellDateFormatted = DateUtil.isCellDateFormatted(cell) ? 1 : 0;
+        switch (isCellDateFormatted) {
+            case 1:
+                return DateUtility.getSimpleDateFormat_YYYY_MM_DD().format(cell.getDateCellValue());
+            case 0:
+                return CheckUtility.formatDoubleXls(cell.getNumericCellValue());
+            default:
+                return null;
+        }
     }
 
-  }
+    public String getCellValue(Cell cell) {
+        switch (cell.getCellType()) {
+            case NUMERIC:
+                return numericOrDate(cell);
+            case STRING:
+                return CheckUtility.checkString(cell.getStringCellValue());
+            case BOOLEAN:
+                return String.valueOf(cell.getBooleanCellValue());
+            case FORMULA:
+                return String.valueOf(cell.getCellFormula());
+            case ERROR:
+                return String.valueOf(cell.getErrorCellValue());
+            default:
+                return null;
+        }
+    }
 
-  public String checkField(String field) {
+    public List<String> readLine(Row row, int maxColumn) {
+        return IntStream.range(0, maxColumn).mapToObj(index -> readLineImpl(row, index)).collect(Collectors.toList());
+    }
 
-    return Optional.ofNullable(field)
-        .map(String::trim)
-        .filter(e -> !e.isEmpty())
-        .orElseGet(() -> null);
-  }
+    public String readLineImpl(Row row, int index) {
+        try {
+            return checkField(getCellValue(row.getCell(index)));
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public String checkField(String field) {
+        return Optional.ofNullable(field).map(String::trim).filter(e -> !e.isEmpty()).orElseGet(() -> null);
+    }
 }

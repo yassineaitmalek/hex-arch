@@ -18,5 +18,4 @@ public class QrInput {
     private Integer height;
 
     private Integer width;
-
 }

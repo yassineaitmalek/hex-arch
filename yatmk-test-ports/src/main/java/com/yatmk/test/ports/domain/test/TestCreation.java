@@ -2,7 +2,6 @@ package com.yatmk.test.ports.domain.test;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

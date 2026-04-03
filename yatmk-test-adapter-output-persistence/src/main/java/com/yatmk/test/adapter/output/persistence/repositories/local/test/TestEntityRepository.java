@@ -38,58 +38,58 @@ public class TestEntityRepository implements TestPort {
     @Override
     public TestDTO save(TestCreation testCreation) {
         return Optional
-                .ofNullable(testCreation)
-                .map(e -> modelMapper.map(e, TestEntity.class))
-                .map(jpaTestEntityRepository::save)
-                .map(testEntityMapper::toDTO)
-                .orElseThrow(() -> new ServerSideException("error while saving the test"));
+            .ofNullable(testCreation)
+            .map(e -> modelMapper.map(e, TestEntity.class))
+            .map(jpaTestEntityRepository::save)
+            .map(testEntityMapper::toDTO)
+            .orElseThrow(() -> new ServerSideException("error while saving the test"));
     }
 
     @Override
     public List<TestDTO> getAudit(Long id) {
         return Optional
-                .ofNullable(id)
-                .map(jpaTestEntityRepository::findRevisions)
-                .orElseGet(Revisions::none)
-                .map(Revision::getEntity)
-                .map(testEntityMapper::toDTO)
-                .stream()
-                .collect(Collectors.toList());
+            .ofNullable(id)
+            .map(jpaTestEntityRepository::findRevisions)
+            .orElseGet(Revisions::none)
+            .map(Revision::getEntity)
+            .map(testEntityMapper::toDTO)
+            .stream()
+            .collect(Collectors.toList());
     }
 
     @Override
     public TestDTO get(Long id) {
         return Optional
-                .ofNullable(id)
-                .flatMap(jpaTestEntityRepository::findById)
-                .map(testEntityMapper::toDTO)
-                .orElseThrow(() -> new ResourceNotFoundException("test with id " + id + " not found"));
+            .ofNullable(id)
+            .flatMap(jpaTestEntityRepository::findById)
+            .map(testEntityMapper::toDTO)
+            .orElseThrow(() -> new ResourceNotFoundException("test with id " + id + " not found"));
     }
 
     @Override
     public void delete(Long id) {
         Optional
-                .ofNullable(id)
-                .map(jpaTestEntityRepository::findById)
-                .map(Optional::get)
-                .ifPresent(jpaTestEntityRepository::delete);
+            .ofNullable(id)
+            .map(jpaTestEntityRepository::findById)
+            .map(Optional::get)
+            .ifPresent(jpaTestEntityRepository::delete);
     }
 
     @Override
     public TestDTO update(Long id, TestUpdate update) {
         TestEntity entity = Optional
-                .ofNullable(id)
-                .map(jpaTestEntityRepository::findById)
-                .map(Optional::get)
-                .orElseThrow(() -> new ResourceNotFoundException("test with id " + id + " not found"));
+            .ofNullable(id)
+            .map(jpaTestEntityRepository::findById)
+            .map(Optional::get)
+            .orElseThrow(() -> new ResourceNotFoundException("test with id " + id + " not found"));
 
         modelMapper.map(update, entity);
 
         return Optional
-                .of(entity)
-                .map(jpaTestEntityRepository::save)
-                .map(testEntityMapper::toDTO)
-                .orElseThrow(() -> new ServerSideException("error while saving the test"));
+            .of(entity)
+            .map(jpaTestEntityRepository::save)
+            .map(testEntityMapper::toDTO)
+            .orElseThrow(() -> new ServerSideException("error while saving the test"));
     }
 
     private List<TestEntity> findAll() {

@@ -23,12 +23,13 @@ public class MailProducer implements SendMailEvent {
 
         if (Objects.nonNull(mail)) {
             MailEvent mailEvent = new MailEvent(
-                    this,
-                    mail.getTo(),
-                    mail.getCopy(),
-                    mail.getSubject(),
-                    mail.getBody(),
-                    Collections.emptyList());
+                this,
+                mail.getTo(),
+                mail.getCopy(),
+                mail.getSubject(),
+                mail.getBody(),
+                Collections.emptyList()
+            );
 
             eventPublisher.publishEvent(mailEvent);
         }
