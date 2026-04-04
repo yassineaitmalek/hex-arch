@@ -17,7 +17,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import java.io.InputStream;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
-import org.springdoc.core.annotations.ParameterObject;
+import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.Assert;
@@ -44,17 +44,9 @@ public class QrCodeController implements AbstractResponseController {
 	private final QrCodeDecoder qrCodeDecoder;
 
 	@Operation( summary = "Decode a QR Code" )
-	@io.swagger.v3.oas.annotations.parameters.RequestBody(
-	        required = true, content = @Content(
-	                mediaType = MediaType.MULTIPART_FORM_DATA_VALUE, schema = @Schema( implementation = FileInput.class )
-	        )
-	)
-	@ApiResponse(
-	        responseCode = "200", description = "QR Code decoded successfully", content = @Content( mediaType = MediaType.APPLICATION_JSON_VALUE )
-	)
-	@PutMapping(
-	        value = "/decode", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE}, produces = MediaType.APPLICATION_JSON_VALUE
-	)
+	@io.swagger.v3.oas.annotations.parameters.RequestBody( required = true, content = @Content( mediaType = MediaType.MULTIPART_FORM_DATA_VALUE, schema = @Schema( implementation = FileInput.class ) ) )
+	@ApiResponse( responseCode = "200", description = "QR Code decoded successfully", content = @Content( mediaType = MediaType.APPLICATION_JSON_VALUE ) )
+	@PutMapping( value = "/decode", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE}, produces = MediaType.APPLICATION_JSON_VALUE )
 	public ResponseEntity<ApiDataResponse<String>> decode(@ParameterObject @ModelAttribute FileInput input) {
 		Assert.notNull(input);
 		Assert.notNull(input.getFile());
@@ -67,9 +59,7 @@ public class QrCodeController implements AbstractResponseController {
 		}
 	}
 
-	@ApiResponse(
-	        responseCode = "200", description = "OK", content = @Content( mediaType = "application/octet-stream", schema = @Schema( type = "string", format = "binary" ) )
-	)
+	@ApiResponse( responseCode = "200", description = "OK", content = @Content( mediaType = "application/octet-stream", schema = @Schema( type = "string", format = "binary" ) ) )
 	@PostMapping( value = "/encode", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE )
 	public ResponseEntity<byte[]> encode(@ParameterObject @ModelAttribute QrInput input) {
 		Assert.notNull(input);

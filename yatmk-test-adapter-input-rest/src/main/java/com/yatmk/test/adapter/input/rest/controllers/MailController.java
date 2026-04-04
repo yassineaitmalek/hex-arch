@@ -18,7 +18,7 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
-import org.springdoc.core.annotations.ParameterObject;
+import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -46,14 +46,8 @@ public class MailController implements AbstractResponseController {
 	private final MailMapper mailMapper;
 
 	@Operation( summary = "Create a new mail" )
-	@io.swagger.v3.oas.annotations.parameters.RequestBody(
-	        required = true, content = @Content(
-	                mediaType = MediaType.MULTIPART_FORM_DATA_VALUE, schema = @Schema( implementation = MailInput.class )
-	        )
-	)
-	@ApiResponse(
-	        responseCode = "200", description = "Mail sent successfully", content = @Content( mediaType = MediaType.APPLICATION_JSON_VALUE )
-	)
+	@io.swagger.v3.oas.annotations.parameters.RequestBody( required = true, content = @Content( mediaType = MediaType.MULTIPART_FORM_DATA_VALUE, schema = @Schema( implementation = MailInput.class ) ) )
+	@ApiResponse( responseCode = "200", description = "Mail sent successfully", content = @Content( mediaType = MediaType.APPLICATION_JSON_VALUE ) )
 	@PutMapping( consumes = {MediaType.MULTIPART_FORM_DATA_VALUE}, produces = MediaType.APPLICATION_JSON_VALUE )
 	public ResponseEntity<Void> sendMail(@ParameterObject @ModelAttribute MailInput mailInput) {
 		Mail mail = mailMapper.toDomain(mailInput);
@@ -61,17 +55,9 @@ public class MailController implements AbstractResponseController {
 	}
 
 	@Operation( summary = "Create a new mail Scheduled" )
-	@io.swagger.v3.oas.annotations.parameters.RequestBody(
-	        required = true, content = @Content(
-	                mediaType = MediaType.MULTIPART_FORM_DATA_VALUE, schema = @Schema( implementation = MailInput.class )
-	        )
-	)
-	@ApiResponse(
-	        responseCode = "200", description = "Mail sent successfully", content = @Content( mediaType = MediaType.APPLICATION_JSON_VALUE )
-	)
-	@PutMapping(
-	        value = "/scheduled", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE}, produces = MediaType.APPLICATION_JSON_VALUE
-	)
+	@io.swagger.v3.oas.annotations.parameters.RequestBody( required = true, content = @Content( mediaType = MediaType.MULTIPART_FORM_DATA_VALUE, schema = @Schema( implementation = MailInput.class ) ) )
+	@ApiResponse( responseCode = "200", description = "Mail sent successfully", content = @Content( mediaType = MediaType.APPLICATION_JSON_VALUE ) )
+	@PutMapping( value = "/scheduled", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE}, produces = MediaType.APPLICATION_JSON_VALUE )
 	public ResponseEntity<Void> sendMailScheduled(@ParameterObject @ModelAttribute MailInput mailInput) {
 		Mail mail = mailMapper.toDomain(mailInput);
 

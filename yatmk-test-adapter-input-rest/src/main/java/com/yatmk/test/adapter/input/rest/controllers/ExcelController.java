@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
 import java.util.stream.LongStream;
 import lombok.RequiredArgsConstructor;
 import org.apache.poi.ss.usermodel.Sheet;
-import org.springdoc.core.annotations.ParameterObject;
+import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -46,9 +46,7 @@ public class ExcelController implements AbstractResponseController {
 
 	private final ExcelService excelService;
 
-	@ApiResponse(
-	        responseCode = "200", description = "OK", content = @Content( mediaType = "application/octet-stream", schema = @Schema( type = "string", format = "binary" ) )
-	)
+	@ApiResponse( responseCode = "200", description = "OK", content = @Content( mediaType = "application/octet-stream", schema = @Schema( type = "string", format = "binary" ) ) )
 	@GetMapping( value = "/download", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE )
 	public ResponseEntity<byte[]> downloadSimpleXLSX() {
 		SimpleExcelWriter<TestDTO> writer = new SimpleExcelWriter<TestDTO>() {
@@ -68,24 +66,14 @@ public class ExcelController implements AbstractResponseController {
 		ExcelSheetExporter excelSheetExporter = excelService.exportWorkBook(ExcelType.XLSX, "TestModelSimple", writer);
 
 		return download(
-		        ApiDownloadInput.builder().bytes(excelSheetExporter.getBytes()).fileName(excelSheetExporter.getFileName()).ext(excelSheetExporter.getExt()).build()
-		);
+		        ApiDownloadInput.builder().bytes(excelSheetExporter.getBytes()).fileName(excelSheetExporter.getFileName()).ext(excelSheetExporter.getExt()).build());
 	}
 
-	@io.swagger.v3.oas.annotations.parameters.RequestBody(
-	        required = true, content = @Content(
-	                mediaType = MediaType.MULTIPART_FORM_DATA_VALUE, schema = @Schema( implementation = FileInput.class )
-	        )
-	)
-	@ApiResponse(
-	        responseCode = "200", description = "excel file imported successfully", content = @Content( mediaType = MediaType.APPLICATION_JSON_VALUE )
-	)
-	@PutMapping(
-	        value = "/import", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE}, produces = MediaType.APPLICATION_JSON_VALUE
-	)
+	@io.swagger.v3.oas.annotations.parameters.RequestBody( required = true, content = @Content( mediaType = MediaType.MULTIPART_FORM_DATA_VALUE, schema = @Schema( implementation = FileInput.class ) ) )
+	@ApiResponse( responseCode = "200", description = "excel file imported successfully", content = @Content( mediaType = MediaType.APPLICATION_JSON_VALUE ) )
+	@PutMapping( value = "/import", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE}, produces = MediaType.APPLICATION_JSON_VALUE )
 	public ResponseEntity<ApiDataResponse<List<ExcelSheetData>>> importSimpleXLSX(
-	                                                                              @ParameterObject @ModelAttribute FileInput fileDTO
-	) {
+	                                                                              @ParameterObject @ModelAttribute FileInput fileDTO) {
 		try ( InputStream in = fileDTO.getFile().getInputStream() ) {
 			return ok(() -> excelService.readExcel(in, ExcelType.XLSX, true));
 		} catch ( Exception e ) {
