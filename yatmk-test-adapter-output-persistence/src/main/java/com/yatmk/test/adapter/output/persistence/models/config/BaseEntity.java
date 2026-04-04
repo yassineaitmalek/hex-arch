@@ -1,5 +1,6 @@
 package com.yatmk.test.adapter.output.persistence.models.config;
 
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import javax.persistence.Column;
@@ -17,32 +18,34 @@ import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+
 @Getter
 @Setter
 @MappedSuperclass
-@EntityListeners(AuditingEntityListener.class)
+@EntityListeners( AuditingEntityListener.class )
 public abstract class BaseEntity implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+	@Id
+	@GeneratedValue( strategy = GenerationType.AUTO )
+	private Long id;
 
-    @CreationTimestamp
-    @Column(updatable = false, nullable = false)
-    private LocalDateTime createdDate;
+	@CreationTimestamp
+	@Column( updatable = false, nullable = false )
+	private LocalDateTime createdDate;
 
-    @UpdateTimestamp
-    @Column(nullable = false)
-    private LocalDateTime lastModifiedDate;
+	@UpdateTimestamp
+	@Column( nullable = false )
+	private LocalDateTime lastModifiedDate;
 
-    @Version
-    private Long version;
+	@Version
+	private Long version;
 
-    @CreatedBy
-    @Column(updatable = false, nullable = false)
-    private String createdBy;
+	@CreatedBy
+	@Column( updatable = false, nullable = false )
+	private String createdBy;
 
-    @LastModifiedBy
-    @Column(nullable = false)
-    private String lastModifiedBy;
+	@LastModifiedBy
+	@Column( nullable = false )
+	private String lastModifiedBy;
+
 }

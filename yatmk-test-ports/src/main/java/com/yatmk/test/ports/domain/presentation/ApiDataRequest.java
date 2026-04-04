@@ -1,5 +1,6 @@
 package com.yatmk.test.ports.domain.presentation;
 
+
 import java.time.LocalDateTime;
 import java.util.UUID;
 import lombok.AllArgsConstructor;
@@ -8,6 +9,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+
 @Getter
 @Setter
 @Builder
@@ -15,23 +17,24 @@ import lombok.Setter;
 @AllArgsConstructor
 public class ApiDataRequest {
 
-    private String serviceName;
+	private String serviceName;
 
-    private String originalApp;
+	private String originalApp;
 
-    private String targetApp;
+	private String targetApp;
 
-    private String canal;
+	private String canal;
 
-    private String protocol;
+	private String protocol;
 
-    private String method;
+	private String method;
 
-    private String uri;
+	private String uri;
 
-    @Builder.Default
-    private String requestID = UUID.randomUUID().toString();
+	@Builder.Default
+	private String requestID = UUID.randomUUID().toString();
 
-    @Builder.Default
-    private LocalDateTime start = LocalDateTime.now();
+	@Builder.Default
+	private LocalDateTime start = LocalDateTime.now();
+
 }

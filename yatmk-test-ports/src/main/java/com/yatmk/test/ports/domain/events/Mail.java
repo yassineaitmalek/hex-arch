@@ -1,5 +1,6 @@
 package com.yatmk.test.ports.domain.events;
 
+
 import java.io.InputStream;
 import java.util.List;
 import lombok.AllArgsConstructor;
@@ -8,6 +9,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+
 @Getter
 @Setter
 @Builder
@@ -15,29 +17,31 @@ import lombok.Setter;
 @AllArgsConstructor
 public class Mail {
 
-    private List<String> to;
+	private List<String> to;
 
-    private List<String> copy;
+	private List<String> copy;
 
-    private String subject;
+	private String subject;
 
-    private String body;
+	private String body;
 
-    private List<MailFile> attachments;
+	private List<MailFile> attachments;
 
-    @Setter
-    @Getter
-    @Builder
-    @NoArgsConstructor
-    @AllArgsConstructor
-    public static class MailFile {
+	@Setter
+	@Getter
+	@Builder
+	@NoArgsConstructor
+	@AllArgsConstructor
+	public static class MailFile {
 
-        private InputStream inputStream;
+		private InputStream inputStream;
 
-        private String contentType;
+		private String contentType;
 
-        private String fileName;
+		private String fileName;
 
-        private Long fileSize;
-    }
+		private Long fileSize;
+
+	}
+
 }

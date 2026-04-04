@@ -1,5 +1,6 @@
 package com.yatmk.test.adapter.events.config;
 
+
 import java.util.Properties;
 import javax.mail.Session;
 import lombok.RequiredArgsConstructor;
@@ -8,42 +9,44 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+
 @Slf4j
 @Configuration
 @RequiredArgsConstructor
 public class MailConf {
 
-    @Value("${spring.mail.username}")
-    private String userName;
+	@Value( "${spring.mail.username}" )
+	private String userName;
 
-    @Value("${spring.mail.password}")
-    private String password;
+	@Value( "${spring.mail.password}" )
+	private String password;
 
-    @Value("${spring.mail.host}")
-    private String host;
+	@Value( "${spring.mail.host}" )
+	private String host;
 
-    @Value("${spring.mail.port}")
-    private String port;
+	@Value( "${spring.mail.port}" )
+	private String port;
 
-    @Value("${spring.mail.properties.mail.smtp.auth}")
-    private String auth;
+	@Value( "${spring.mail.properties.mail.smtp.auth}" )
+	private String auth;
 
-    @Value("${spring.mail.properties.mail.smtp.starttls.enable}")
-    private String enabled;
+	@Value( "${spring.mail.properties.mail.smtp.starttls.enable}" )
+	private String enabled;
 
-    private final MailAuthenticator mailAuthenticator;
+	private final MailAuthenticator mailAuthenticator;
 
-    @Bean
-    public Session getMailSession() {
-        log.info("Configuring Mail Session");
+	@Bean
+	public Session getMailSession() {
+		log.info("Configuring Mail Session");
 
-        Properties props = new Properties();
-        props.put("mail.smtp.auth", auth);
-        props.put("mail.smtp.starttls.enable", enabled);
-        props.put("mail.smtp.host", host);
-        props.put("mail.smtp.port", port);
-        props.put("mail.smtp.ssl.trust", host);
+		Properties props = new Properties();
+		props.put("mail.smtp.auth", auth);
+		props.put("mail.smtp.starttls.enable", enabled);
+		props.put("mail.smtp.host", host);
+		props.put("mail.smtp.port", port);
+		props.put("mail.smtp.ssl.trust", host);
 
-        return Session.getInstance(props, mailAuthenticator);
-    }
+		return Session.getInstance(props, mailAuthenticator);
+	}
+
 }

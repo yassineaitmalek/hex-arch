@@ -1,5 +1,6 @@
 package com.yatmk.test.ports.domain.test;
 
+
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import lombok.AllArgsConstructor;
@@ -8,6 +9,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+
 @Getter
 @Setter
 @Builder
@@ -15,11 +17,12 @@ import lombok.Setter;
 @AllArgsConstructor
 public class TestUpdate {
 
-    private String attr1;
+	private String attr1;
 
-    private BigInteger attr2;
+	private BigInteger attr2;
 
-    private Boolean attr3;
+	private Boolean attr3;
 
-    private BigDecimal attr4;
+	private BigDecimal attr4;
+
 }

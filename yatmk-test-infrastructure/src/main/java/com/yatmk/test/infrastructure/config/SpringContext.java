@@ -1,35 +1,39 @@
 package com.yatmk.test.infrastructure.config;
 
+
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
 
+
 @Component
 public class SpringContext implements ApplicationContextAware {
 
-    private static Holder<ApplicationContext> contextHolder = new Holder<>();
+	private static Holder<ApplicationContext> contextHolder = new Holder<>();
 
-    @Override
-    public void setApplicationContext(@NonNull ApplicationContext applicationContext) throws BeansException {
-        contextHolder.hold(applicationContext);
-    }
+	@Override
+	public void setApplicationContext(@NonNull ApplicationContext applicationContext) throws BeansException {
+		contextHolder.hold(applicationContext);
+	}
 
-    public static ApplicationContext getContext() {
-        return contextHolder.get();
-    }
+	public static ApplicationContext getContext() {
+		return contextHolder.get();
+	}
 
-    public static class Holder<T> {
+	public static class Holder<T> {
 
-        private T value;
+		private T value;
 
-        public void hold(T value) {
-            this.value = value;
-        }
+		public void hold(T value) {
+			this.value = value;
+		}
 
-        public T get() {
-            return value;
-        }
-    }
+		public T get() {
+			return value;
+		}
+
+	}
+
 }

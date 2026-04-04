@@ -1,10 +1,12 @@
 package com.yatmk.test.ports.domain.dto;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
 
 @Getter
 @Setter
@@ -13,5 +15,6 @@ import lombok.Setter;
 @AllArgsConstructor
 public class VersionDTO {
 
-    private String version;
+	private String version;
+
 }

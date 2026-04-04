@@ -1,30 +1,33 @@
 package com.yatmk.test.adapter.output.persistence.specification;
 
+
 import java.util.Optional;
 import java.util.function.Function;
 import org.springframework.data.jpa.domain.Specification;
 
+
 public interface AbstractSpecification {
-    public static String like(String element) {
-        return Optional.ofNullable(element).map(e -> "%" + e + "%").orElseGet(() -> "%%");
-    }
+	public static String like(String element) {
+		return Optional.ofNullable(element).map(e -> "%" + e + "%").orElseGet(() -> "%%");
+	}
 
-    public static <T, U> Optional<Specification<U>> transformer(T object, Function<T, Specification<U>> mapper) {
-        return Optional.ofNullable(object).map(mapper::apply);
-    }
+	public static <T, U> Optional<Specification<U>> transformer(T object, Function<T, Specification<U>> mapper) {
+		return Optional.ofNullable(object).map(mapper::apply);
+	}
 
-    public static <T> Specification<T> distinct() {
-        return (root, query, builder) -> {
-            query.distinct(true);
-            return builder.isNotNull(root);
-        };
-    }
+	public static <T> Specification<T> distinct() {
+		return (root, query, builder) -> {
+			query.distinct(true);
+			return builder.isNotNull(root);
+		};
+	}
 
-    public static <T> Specification<T> whereDistinct() {
-        return Specification.where(distinct());
-    }
+	public static <T> Specification<T> whereDistinct() {
+		return Specification.where(distinct());
+	}
 
-    public static <T> Specification<T> unitSpecification() {
-        return (root, query, builder) -> builder.isNotNull(root);
-    }
+	public static <T> Specification<T> unitSpecification() {
+		return (root, query, builder) -> builder.isNotNull(root);
+	}
+
 }

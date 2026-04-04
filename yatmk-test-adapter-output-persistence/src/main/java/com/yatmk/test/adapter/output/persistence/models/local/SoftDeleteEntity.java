@@ -1,4 +1,6 @@
 package com.yatmk.test.adapter.output.persistence.models.local;
+
+
 //@Entity
 //@Data
 //@With

@@ -1,5 +1,6 @@
 package com.yatmk.test.adapter.input.rest.controllers;
 
+
 import com.yatmk.test.adapter.input.rest.config.AbstractResponseController;
 import com.yatmk.test.adapter.input.rest.dto.FileInput;
 import com.yatmk.test.common.excel.ExcelService;
@@ -33,73 +34,63 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+
 @Validated
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(ExcelController.PATH)
-@Tag(name = "excel-io", description = "Excel Input/Output")
+@RequestMapping( ExcelController.PATH )
+@Tag( name = "excel-io", description = "Excel Input/Output" )
 public class ExcelController implements AbstractResponseController {
 
-    public static final String PATH = "/api/excel-io";
+	public static final String PATH = "/api/excel-io";
 
-    private final ExcelService excelService;
+	private final ExcelService excelService;
 
-    @ApiResponse(
-        responseCode = "200",
-        description = "OK",
-        content = @Content(mediaType = "application/octet-stream", schema = @Schema(type = "string", format = "binary"))
-    )
-    @GetMapping(value = "/download", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
-    public ResponseEntity<byte[]> downloadSimpleXLSX() {
-        SimpleExcelWriter<TestDTO> writer = new SimpleExcelWriter<TestDTO>() {
-            @Override
-            public void write(TestDTO entity, Sheet sheet, AtomicInteger row, AtomicInteger column) {
-                addLabel(sheet, column, row, entity.getId());
-                addLabel(sheet, column, row, entity.getAttr1());
-                addLabel(sheet, column, row, entity.getAttr2());
-                addLabel(sheet, column, row, entity.getAttr3());
-                addLabel(sheet, column, row, entity.getAttr4());
-            }
-        };
-        writer.setHeader(Arrays.asList("id", "str1", "str2", "str3", "str4"));
-        writer.setSheetName("str");
-        writer.setLines(LongStream.range(1, 1000).mapToObj(TestDTO::new).collect(Collectors.toList()));
-        ExcelSheetExporter excelSheetExporter = excelService.exportWorkBook(ExcelType.XLSX, "TestModelSimple", writer);
+	@ApiResponse(
+	        responseCode = "200", description = "OK", content = @Content( mediaType = "application/octet-stream", schema = @Schema( type = "string", format = "binary" ) )
+	)
+	@GetMapping( value = "/download", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE )
+	public ResponseEntity<byte[]> downloadSimpleXLSX() {
+		SimpleExcelWriter<TestDTO> writer = new SimpleExcelWriter<TestDTO>() {
+			@Override
+			public void write(TestDTO entity, Sheet sheet, AtomicInteger row, AtomicInteger column) {
+				addLabel(sheet, column, row, entity.getId());
+				addLabel(sheet, column, row, entity.getAttr1());
+				addLabel(sheet, column, row, entity.getAttr2());
+				addLabel(sheet, column, row, entity.getAttr3());
+				addLabel(sheet, column, row, entity.getAttr4());
+			}
 
-        return download(
-            ApiDownloadInput
-                .builder()
-                .bytes(excelSheetExporter.getBytes())
-                .fileName(excelSheetExporter.getFileName())
-                .ext(excelSheetExporter.getExt())
-                .build()
-        );
-    }
+		};
+		writer.setHeader(Arrays.asList("id", "str1", "str2", "str3", "str4"));
+		writer.setSheetName("str");
+		writer.setLines(LongStream.range(1, 1000).mapToObj(TestDTO::new).collect(Collectors.toList()));
+		ExcelSheetExporter excelSheetExporter = excelService.exportWorkBook(ExcelType.XLSX, "TestModelSimple", writer);
 
-    @io.swagger.v3.oas.annotations.parameters.RequestBody(
-        required = true,
-        content = @Content(
-            mediaType = MediaType.MULTIPART_FORM_DATA_VALUE,
-            schema = @Schema(implementation = FileInput.class)
-        )
-    )
-    @ApiResponse(
-        responseCode = "200",
-        description = "excel file imported successfully",
-        content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE)
-    )
-    @PutMapping(
-        value = "/import",
-        consumes = { MediaType.MULTIPART_FORM_DATA_VALUE },
-        produces = MediaType.APPLICATION_JSON_VALUE
-    )
-    public ResponseEntity<ApiDataResponse<List<ExcelSheetData>>> importSimpleXLSX(
-        @ParameterObject @ModelAttribute FileInput fileDTO
-    ) {
-        try (InputStream in = fileDTO.getFile().getInputStream()) {
-            return ok(() -> excelService.readExcel(in, ExcelType.XLSX, true));
-        } catch (Exception e) {
-            throw new ServerSideException(e);
-        }
-    }
+		return download(
+		        ApiDownloadInput.builder().bytes(excelSheetExporter.getBytes()).fileName(excelSheetExporter.getFileName()).ext(excelSheetExporter.getExt()).build()
+		);
+	}
+
+	@io.swagger.v3.oas.annotations.parameters.RequestBody(
+	        required = true, content = @Content(
+	                mediaType = MediaType.MULTIPART_FORM_DATA_VALUE, schema = @Schema( implementation = FileInput.class )
+	        )
+	)
+	@ApiResponse(
+	        responseCode = "200", description = "excel file imported successfully", content = @Content( mediaType = MediaType.APPLICATION_JSON_VALUE )
+	)
+	@PutMapping(
+	        value = "/import", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE}, produces = MediaType.APPLICATION_JSON_VALUE
+	)
+	public ResponseEntity<ApiDataResponse<List<ExcelSheetData>>> importSimpleXLSX(
+	                                                                              @ParameterObject @ModelAttribute FileInput fileDTO
+	) {
+		try ( InputStream in = fileDTO.getFile().getInputStream() ) {
+			return ok(() -> excelService.readExcel(in, ExcelType.XLSX, true));
+		} catch ( Exception e ) {
+			throw new ServerSideException(e);
+		}
+	}
+
 }

@@ -1,5 +1,6 @@
 package com.yatmk.test.adapter.input.rest.dto;
 
+
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -8,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.web.multipart.MultipartFile;
 
+
 @Getter
 @Setter
 @Builder
@@ -15,13 +17,14 @@ import org.springframework.web.multipart.MultipartFile;
 @AllArgsConstructor
 public class MailInput {
 
-    private List<String> to;
+	private List<String> to;
 
-    private List<String> copy;
+	private List<String> copy;
 
-    private String subject;
+	private String subject;
 
-    private String body;
+	private String body;
 
-    private List<MultipartFile> attachments;
+	private List<MultipartFile> attachments;
+
 }

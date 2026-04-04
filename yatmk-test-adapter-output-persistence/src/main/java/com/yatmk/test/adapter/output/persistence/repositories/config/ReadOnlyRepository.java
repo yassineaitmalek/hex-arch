@@ -1,5 +1,6 @@
 package com.yatmk.test.adapter.output.persistence.repositories.config;
 
+
 import java.util.List;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
@@ -8,15 +9,17 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.repository.NoRepositoryBean;
 import org.springframework.data.repository.Repository;
 
+
 @NoRepositoryBean
 public interface ReadOnlyRepository<T, U> extends Repository<T, U> {
-    List<T> findAll();
+	List<T> findAll();
 
-    List<T> findAll(Sort sort);
+	List<T> findAll(Sort sort);
 
-    Page<T> findAll(Pageable pageable);
+	Page<T> findAll(Pageable pageable);
 
-    Optional<T> findById(U id);
+	Optional<T> findById(U id);
 
-    long count();
+	long count();
+
 }

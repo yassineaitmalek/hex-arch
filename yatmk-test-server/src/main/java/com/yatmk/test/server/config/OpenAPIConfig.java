@@ -1,5 +1,6 @@
 package com.yatmk.test.server.config;
 
+
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.info.Info;
 import io.swagger.v3.oas.models.Components;
@@ -13,43 +14,41 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+
 @Configuration
-@OpenAPIDefinition(info = @Info(title = "YATMK - TEST API", version = "1.0", description = "YATMK - TEST API"))
+@OpenAPIDefinition( info = @Info( title = "YATMK - TEST API", version = "1.0", description = "YATMK - TEST API" ) )
 public class OpenAPIConfig {
 
-    private static final String SECURITY_SCHEME_NAME = "bearerAuth";
+	private static final String SECURITY_SCHEME_NAME = "bearerAuth";
 
-    private static final String SECURITY_SCHEME = "bearer";
+	private static final String SECURITY_SCHEME = "bearer";
 
-    private static final String SECURITY_BEARER_FORMAT = "bearer";
+	private static final String SECURITY_BEARER_FORMAT = "bearer";
 
-    @Value("${server.servlet.context-path:/}")
-    private String serverPath;
+	@Value( "${server.servlet.context-path:/}" )
+	private String serverPath;
 
-    @Bean
-    public OpenAPI openAPI() {
-        return new OpenAPI().servers(servers()).addSecurityItem(securityRequirement()).components(components());
-    }
+	@Bean
+	public OpenAPI openAPI() {
+		return new OpenAPI().servers(servers()).addSecurityItem(securityRequirement()).components(components());
+	}
 
-    public List<Server> servers() {
-        Server server = new Server();
-        server.setUrl(serverPath);
-        return Arrays.asList(server);
-    }
+	public List<Server> servers() {
+		Server server = new Server();
+		server.setUrl(serverPath);
+		return Arrays.asList(server);
+	}
 
-    private SecurityRequirement securityRequirement() {
-        return new SecurityRequirement().addList(SECURITY_SCHEME_NAME);
-    }
+	private SecurityRequirement securityRequirement() {
+		return new SecurityRequirement().addList(SECURITY_SCHEME_NAME);
+	}
 
-    private Components components() {
-        return new Components().addSecuritySchemes(SECURITY_SCHEME_NAME, securityScheme());
-    }
+	private Components components() {
+		return new Components().addSecuritySchemes(SECURITY_SCHEME_NAME, securityScheme());
+	}
 
-    private SecurityScheme securityScheme() {
-        return new SecurityScheme()
-            .name(SECURITY_SCHEME_NAME)
-            .type(SecurityScheme.Type.HTTP)
-            .scheme(SECURITY_SCHEME)
-            .bearerFormat(SECURITY_BEARER_FORMAT);
-    }
+	private SecurityScheme securityScheme() {
+		return new SecurityScheme().name(SECURITY_SCHEME_NAME).type(SecurityScheme.Type.HTTP).scheme(SECURITY_SCHEME).bearerFormat(SECURITY_BEARER_FORMAT);
+	}
+
 }

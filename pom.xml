@@ -365,6 +365,7 @@
           <artifactId>spotless-maven-plugin</artifactId>
           <version>2.43.0</version>
           <configuration>
+            <!-- 
             <java>
               <prettier>
                 <devDependencies>
@@ -378,6 +379,16 @@
               </prettier>
               <removeUnusedImports />
               <importOrder />
+            </java> 
+            -->
+            <java>
+              <eclipse>
+                <file>${project.basedir}/../format-rules.xml</file>
+              </eclipse>
+              <removeUnusedImports />
+              <importOrder>
+                <order></order>
+              </importOrder>
             </java>
           </configuration>
         </plugin>

@@ -1,10 +1,12 @@
 package com.yatmk.test.ports.domain.presentation;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
 
 @Getter
 @Setter
@@ -13,17 +15,18 @@ import lombok.Setter;
 @AllArgsConstructor
 public class ApiPartialInput {
 
-    private byte[] bytes;
+	private byte[] bytes;
 
-    private long start;
+	private long start;
 
-    private long end;
+	private long end;
 
-    private long size;
+	private long size;
 
-    private String content;
+	private String content;
 
-    private String ext;
+	private String ext;
 
-    private long lenght;
+	private long lenght;
+
 }
